@@ -1,0 +1,169 @@
+.player {
+  grid-area: pl;
+  width: 100%;
+  background-color: #fff;
+}
+
+.main{
+  display: grid;
+  align-items: center;
+  height: 100%;
+  grid-template-columns: 227px auto 133px auto 227px;
+}
+
+.info{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 12px;
+
+  &NameContainer{
+    display: flex;
+    flex-direction: column;
+    margin-left: 14px;
+  }
+
+  &Name{
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #4B4B4B;
+  }
+
+  &Artist{
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 12px;
+    color: #4B4B4B;
+  }
+
+}
+
+.actions{
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  margin-left: 50px;
+  cursor: pointer;
+
+  &>*:hover {
+    opacity: .9;
+  }
+}
+
+.control{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &Prev, &Next{
+    cursor: pointer;
+    &:hover{
+      opacity: .9;
+    }
+  }
+
+  &Play{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+
+    &:hover .controlCircleBig{
+      opacity: .4;
+    }
+  }
+
+  &CircleBig{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #97DEF4;
+    opacity: .5;
+    transition: .1s;
+    z-index: 31;
+
+
+  }
+
+  &Circle{
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #69CAC4;
+    z-index: 30;
+  }
+
+  &PlayIcon{
+    z-index: 100;
+    //align-items: center;
+    //position: absolute;
+    margin-left: 3px;
+    margin-top: 3px;
+
+    &:hover{
+      opacity: .9;
+    }
+  }
+}
+
+.extra{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+
+  &Info{
+    display: flex;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: left;
+    margin-right: 40px;
+  }
+
+  &CurrentTime{
+    color: #4B4B4B;
+  }
+
+  &Duration{
+    color: #B1AFAF;
+  }
+}
+
+.queue{
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.volume{
+  margin-right: 26px;
+}
+
+.progress{
+
+  &Bar{
+    position: relative;
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #D7D7D7;
+  }
+
+  &Main{
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 20%;
+    background-color: aquamarine;
+  }
+}

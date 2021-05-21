@@ -1,0 +1,76 @@
+.sidebar{
+
+  .line{
+    display: block;
+    width: 127px;
+    height: 1px;
+    background-color: #fff;
+    opacity: 50%;
+    margin: 35px 0 30px 43px;
+
+  }
+
+  .link{
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 34px;
+    padding: 0 40px;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    text-align: left;
+    color: #ffffff;
+
+    &Active{
+      background-color: #0092C0;
+    }
+  }
+
+  .title{
+    margin-left: 10px;
+  }
+
+}
+
+.mobile{
+  position: fixed;
+  height: 46px;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .container{
+    display: flex;
+    align-items: center;
+    justify-content: normal;
+
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+
+    background-color: #3598B9;
+  }
+
+  .item{
+    padding: 0 15px;
+  }
+
+  .title{
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .titleActive{
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color: #fff;
+    font-weight: 500;
+  }
+}
+

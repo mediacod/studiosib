@@ -1,0 +1,12 @@
+# docker-compose.yml
+
+version: "2"
+services:
+  mediastudiofrontend:
+    container_name: mediastudiofrontend
+    build:
+      context: ../../src/MediaStudio.Frontend
+      dockerfile: ../../docker/MediaStudio.Frontend.Dockerfile
+    ports:
+      - "443:3000"
+    restart: always

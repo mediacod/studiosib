@@ -1,0 +1,72 @@
+.container{
+  display: grid;
+  grid-template-columns: minmax(200px, 29%) minmax(465px, 67%);
+  grid-column-gap: 4%;
+  grid-auto-rows: 0;
+  margin: 100px 150px;
+  height: auto;
+  max-width: 1300px;
+
+  @media (max-width: 1600px) {
+    margin: 70px 100px;
+  }
+
+  @media (max-width: 1400px) {
+    margin: 50px 70px;
+  }
+
+  @media (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    margin: 46px 0 0;
+    overflow-y: scroll;
+  }
+}
+
+.infoContainer{
+    width: 100%;
+    height: 200px;
+
+  @media (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding-top: 54px;
+  }
+}
+
+.content{
+    width: 100%;
+}
+
+
+.cover {
+  width: 100%;
+  border-radius: 5px;
+
+  @media (max-width: 500px) {
+    max-width: 200px;
+  }
+}
+
+.card{
+  display: block;
+  width: 100%;
+  padding: 30px;
+  box-shadow: 0 0 15px -8px #4C4C4C;
+  border-radius: 5px;
+}
+
+.infoBlock{
+  display: flex;
+  justify-content: space-between;
+}
+
+.albumName {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 25px;
+}

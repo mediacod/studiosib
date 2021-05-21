@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MediaStudio</name>
+    </assembly>
+    <members>
+        <member name="M:MediaStudio.Controllers.AdminAlbumController.GetAlbum(System.Int32,System.Boolean)">
+            <summary>
+            Возвращает альбом по идентификатору.
+            </summary>
+            <param name="id">Идентификатор альбома.</param>
+            <param name="isHighQuality">Признак высокого качества.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.AdminAlbumController.Delete(System.Int32)">
+            <summary>
+            Удаляет альбом по идентификатору.
+            </summary>
+            <param name="idAlbum">Идентификатор альбома.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.AlbumController.GetAlbum(System.Int32,System.Boolean)">
+            <summary>
+            Получить альбом.
+            </summary>
+            <param name="id">Идентификатор получаемого альбома.</param>
+            <param name="isHighQuality">Качество получаемого альбома.</param>
+            <returns>Альбом.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.AlbumController.FindByTrack(System.Int64)">
+            <summary>
+            Получить альбом по идентификатору трека.
+            </summary>
+            <param name="idTrack">Идентификатор трека.</param>
+            <returns>Найденный альбом.</returns>
+        </member>
+    </members>
+</doc>

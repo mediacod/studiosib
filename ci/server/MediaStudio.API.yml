@@ -1,0 +1,21 @@
+# docker-compose.yml
+
+version: "2"
+services:
+  mediastudio:
+    container_name: mediastudio
+    build:
+      context: ../../src/
+      dockerfile: ../docker/MediaStudio.Dockerfile
+    ports:
+      - "8081:8081"
+    restart: always
+
+  mediastudiocms:
+    container_name: mediastudiocms
+    build:
+      context: ../../src/
+      dockerfile: ../docker/MediaStudio.CMS.Dockerfile
+    ports:
+      - "8082:8082"
+    restart: always

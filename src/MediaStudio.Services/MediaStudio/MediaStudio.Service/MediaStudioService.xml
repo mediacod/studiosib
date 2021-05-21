@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MediaStudio.Service</name>
+    </assembly>
+    <members>
+        <member name="P:MediaStudioService.Service.ResourceService.Minio.URL">
+            <summary>
+              требует описанние протокола перед URL
+            </summary>
+        </member>
+    </members>
+</doc>

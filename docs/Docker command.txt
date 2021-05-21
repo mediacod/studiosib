@@ -1,0 +1,7 @@
+docker ps -a                    --показать список всех docker контейнеров
+docker stop $(docker ps -a -q)  --останавливает все контейнеры
+docker rm $(docker ps -a -q)    --удаляет все контейнеры
+
+docker image ls -a   	   --показать список всех docker образов
+docker image rm name_image -- удалить образ
+docker image prune         -- удалить все образы
