@@ -20,7 +20,7 @@ export interface IPage {
 }
 
 export interface PageState {
-    page: [] | IPage;
+    page: IPage[] | [];
 }
 
 export enum PageActionTypes {
@@ -28,10 +28,11 @@ export enum PageActionTypes {
     GET_PAGE = 'GET_PAGE'
 }
 
-interface GetPageAction {
+export interface GetPageAction {
     type: PageActionTypes.GET_PAGE,
     payload: number;
 }
+
 interface SetPageAction {
     type: PageActionTypes.SET_PAGE,
     payload: IPage;

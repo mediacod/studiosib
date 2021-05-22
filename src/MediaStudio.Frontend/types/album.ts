@@ -1,6 +1,9 @@
 export interface IAlbumItem{
-    id: number;
-    title: string;
-    count: number;
-    url: string;
+    idObject: number;
+    countTrack: number;
+    colorCode?: string;
+    idTypeCell: number;
+    linkCover?: string;
+    name: string;
+    orderSection?: number;
 }

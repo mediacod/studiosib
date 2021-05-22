@@ -7,12 +7,12 @@ import cover from '../public/images/coverDefault.png';
 
 interface IAlbum{
     album: IAlbumItem;
-    albumWidth: number
+    albumWidth: number;
 }
 
 const AlbumItem: React.FC<IAlbum> = ({album, albumWidth}) => {
 
-    const [coverLink, setCoverLink ] = useState(album.url);
+    const [coverLink, setCoverLink ] = useState(album.linkCover);
     const styleAlbumCover = {"--albumWidth": albumWidth + 4 +'px', display: 'block'}
 
     const coverError = () => {
@@ -21,13 +21,13 @@ const AlbumItem: React.FC<IAlbum> = ({album, albumWidth}) => {
 
     return (
         <div className={styles.albumContainer}>
-            <Link href={'/album/'+ album.id}>
+            <Link href={'/album/'+ album.idObject}>
                 <a>
                     <div className={styles.albumCoverContainer} style={styleAlbumCover}>
-                        <img className={styles.albumCover} src={coverLink } alt={album.title} onError={coverError} loading={"lazy"}/>
+                        <img className={styles.albumCover} src={coverLink || cover} alt={album.name} onError={coverError} loading={"lazy"}/>
                     </div>
-                    <div className={styles.albumTitle}>{album.title}</div>
-                    <div className={styles.albumCountTrack}>{album.count} треков</div>
+                    <div className={styles.albumTitle}>{album.name}</div>
+                    <div className={styles.albumCountTrack}>{album.countTrack} треков</div>
                 </a>
             </Link>
 
