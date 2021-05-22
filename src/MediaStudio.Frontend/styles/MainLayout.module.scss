@@ -1,18 +1,19 @@
-.main{
+.main {
   display: grid;
   grid-template-columns: 228px 1fr;
   grid-auto-rows: 85px 1fr 70px;
   grid-template-areas:
-      "sd hd"
-      "sd ct"
-      "pl pl";
+    "sd hd"
+    "sd ct"
+    "pl pl";
 }
 
-.content{
+.content {
   grid-area: ct;
+  overflow-y: auto;
 }
 
-.mainMobile{
+.mainMobile {
   display: flex;
   flex-direction: column;
   justify-items: center;

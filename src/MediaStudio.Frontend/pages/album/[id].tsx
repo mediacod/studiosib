@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../../styles/AlbumPage.module.scss'
 import MainLayout from "../../layout/MainLayout";
 import Icons from "../../components/Icons";
@@ -7,6 +7,9 @@ import {ITrack} from "../../types/track";
 import Card from '../../components/surfaces/Card';
 import MobileHeader from "../../components/nav/MobileHeaderNav";
 import useMobileDetect from "../../hooks/useUserAgent";
+import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useRouter } from 'next/router';
 
 const AlbumPage: React.FC = () => {
     const album = {id: 2, title: 'Я знаю, Бог не ошибается', count: 10, url: 'http://studiosib.ru/storage/album_images/r6K1dlgNj8LNsn7A16qtw8ug67IZsiFJDcwdUk2r.png'}
@@ -19,15 +22,26 @@ const AlbumPage: React.FC = () => {
 
     const {isMobile} = useMobileDetect();
 
+    const router = useRouter()
+    const { id } = router.query;
+
+    const {getAlbumPage} = useActions()
+
+    useEffect(()=>{
+        getAlbumPage(Number(id))
+    },[])
+
+    const {albumPage} = useTypedSelector(state => state.albumPage);
+
     return (
         <MainLayout>
             {isMobile && <MobileHeader />}
             <div className={styles.container}>
                 <div className={styles.infoContainer}>
-                        <img className={styles.cover} src={album.url}/>
+                        <img className={styles.cover} src={albumPage.linkCover}/>
                         <div className={styles.infoBlock}>
                             <div className={styles.titleContainer}>
-                                <h1 className={styles.albumName}>{album.title}</h1>
+                                <h1 className={styles.albumName}>{albumPage.name}</h1>
                                 <p className={styles.albumArtistName}>Сибирская студия</p>
                                 <p className={styles.albumYear}>2011 год</p>
                             </div>
@@ -35,7 +49,7 @@ const AlbumPage: React.FC = () => {
                         </div>
                 </div>
                 <div className={styles.content}>
-                    {tracks.map(track => <Track track={track} isMobile={isMobile}/>)}
+                    {albumPage.tracks?.map(track => <Track track={track} isMobile={isMobile}/>)}
                 </div>
             </div>
         </MainLayout>

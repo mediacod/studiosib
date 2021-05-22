@@ -7,7 +7,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Index = () => {
 
-    useGetPage(2)
+    useGetPage(1)
     const {page} = useTypedSelector(state => state.page);
 
     return (

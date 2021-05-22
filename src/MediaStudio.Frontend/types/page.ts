@@ -35,7 +35,7 @@ export interface GetPageAction {
 
 interface SetPageAction {
     type: PageActionTypes.SET_PAGE,
-    payload: IPage;
+    payload: IPage[];
 }
 
 export type PageAction =
