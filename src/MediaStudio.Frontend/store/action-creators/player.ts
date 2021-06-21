@@ -1,4 +1,4 @@
-import {PlayerAction, PlayerActionTypes} from "../../types/player";
+import {IQueue, PlayerAction, PlayerActionTypes} from "../../types/player";
 import {ITrack} from "../../types/track";
 
 export const playTrack = (): PlayerAction => {
@@ -18,4 +18,7 @@ export const setVolume = (payload: number): PlayerAction => {
 }
 export const setActive = (payload: ITrack): PlayerAction => {
     return {type: PlayerActionTypes.SET_ACTIVE, payload}
+}
+export const setQueue = (payload: IQueue): PlayerAction => {
+    return {type: PlayerActionTypes.SET_QUEUE, payload}
 }

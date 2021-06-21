@@ -1,6 +1,7 @@
-.track{}
+.track {
+}
 
-.container{
+.container {
   position: relative;
   display: grid;
   grid-template-columns: 40px 1fr 25px 70px 60px;
@@ -21,15 +22,15 @@
   }
 
   &:hover {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
   }
 
   &.active {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
   }
 }
 
-.play{
+.play {
   margin: auto;
 
   @media (max-width: 500px) {
@@ -37,21 +38,20 @@
   }
 }
 
-.name{
+.name {
   font-size: 22px;
   font-weight: 400;
   line-height: 21px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   margin: 0;
   padding-right: 10px;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.duration{
+.duration {
   font-size: 18px;
-  color: #5F5A5A;
+  color: #5f5a5a;
   justify-self: end;
 
   @media (max-width: 500px) {
@@ -59,7 +59,7 @@
   }
 }
 
-.popupMenu{
+.popupMenu {
   //width: 28px;
   justify-self: end;
 
@@ -68,7 +68,7 @@
   }
 }
 
-.like{
+.like {
   width: 23px;
   height: 22px;
   justify-self: end;

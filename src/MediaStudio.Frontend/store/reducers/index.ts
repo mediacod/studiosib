@@ -1,3 +1,4 @@
+import { AlbumPageReducer } from './albumPageReducer';
 import {combineReducers} from "redux";
 import {playerReducer} from "./playerReducer";
 import {HYDRATE} from "next-redux-wrapper";
@@ -5,7 +6,8 @@ import { pageReducer } from "./pageReducer";
 
 const rootReducer = combineReducers({
     player: playerReducer,
-    page: pageReducer
+    page: pageReducer,
+    albumPage: AlbumPageReducer
 })
 
 export const reducer = (state, action) => {

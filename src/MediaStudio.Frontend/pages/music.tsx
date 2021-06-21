@@ -8,9 +8,8 @@ import {useGetPage} from "../hooks/useGetPage";
 
 const Music = () => {
 
-    useGetPage(1)
-    const {page} = useTypedSelector(state => state.page)
-    console.log(page)
+    useGetPage(2)
+    const {page} = useTypedSelector(state => state.page);
 
     return (
         <MainLayout>
