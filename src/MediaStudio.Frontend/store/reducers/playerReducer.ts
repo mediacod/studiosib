@@ -1,6 +1,8 @@
 import {PlayerAction, PlayerActionTypes, PlayerState} from "../../types/player";
 
 const initialState: PlayerState = {
+    queue: [],
+    idAlbum: null,
     pause: true,
     duration: 0,
     active: null,
@@ -22,6 +24,9 @@ export const playerReducer = (state = initialState, action: PlayerAction): Playe
             return {...state, volume: action.payload}
         case PlayerActionTypes.SET_ACTIVE:
             return {...state, active: action.payload, currentTime: 0, duration: 0}
+        case PlayerActionTypes.SET_QUEUE:
+            console.log('red', action.payload)
+            return {...state, currentTime: 0, duration: 0}
         default: return state
     }
 }
