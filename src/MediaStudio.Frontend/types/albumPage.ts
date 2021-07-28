@@ -18,6 +18,7 @@ export interface AlbumPageState {
 export enum AlbumPageActionTypes {
     SET_ALBUM_PAGE = 'SET_ALBUM_PAGE',
     GET_ALBUM_PAGE = 'GET_ALBUM_PAGE',
+    GET_PLAYLIST_PAGE = 'GET_PLAYLIST_PAGE'
 }
 
 export interface GetAlbumPageAction {
@@ -30,6 +31,12 @@ interface SetAlbumPageAction {
     payload: IAlbumPage;
 }
 
+export interface GetPlaylistPageAction {
+    type: AlbumPageActionTypes.GET_PLAYLIST_PAGE,
+    payload: number;
+}
+
 export type AlbumPageAction =
     GetAlbumPageAction
     | SetAlbumPageAction
+    | GetPlaylistPageAction

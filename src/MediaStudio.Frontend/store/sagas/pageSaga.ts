@@ -11,7 +11,6 @@ export function* pageSagaWatcher() {
 
 function* sagaGetList ({payload}:GetPageAction) {
     let response = yield sectionAPI.list(payload)
-    console.log(response)
     yield put(setPage(response.data))
 }
 

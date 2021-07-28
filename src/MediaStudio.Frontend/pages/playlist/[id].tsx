@@ -10,18 +10,18 @@ import { useRouter } from 'next/router';
 import { setQueue } from '../../store/action-creators/player';
 import {useQueue} from "../../hooks/useQueue";
 
-const AlbumPage: React.FC = () => {
+const PlaylistPage: React.FC = () => {
 
     const { isMobile } = useMobileDetect();
 
     const router = useRouter()
     const { id } = router.query;
 
-    const { getAlbumPage, setQueue, playTrack, pauseTrack, setActive } = useActions()
+    const { getPlaylistPage, setQueue, playTrack, pauseTrack, setActive } = useActions()
     const {playHandler} = useQueue()
 
     useEffect(() => {
-        getAlbumPage(Number(id))
+        getPlaylistPage(Number(id))
     }, [])
 
     const { albumPage } = useTypedSelector(state => state.albumPage);
@@ -54,4 +54,4 @@ const AlbumPage: React.FC = () => {
     );
 };
 
-export default React.memo(AlbumPage);
+export default React.memo(PlaylistPage);
