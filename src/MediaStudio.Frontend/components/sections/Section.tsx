@@ -16,9 +16,9 @@ const Section: React.FC<{ title: string, cells: ICells[] }> = ({title, cells}) =
             <div className={styles.section} style={style} ref={myRef}>
                 {cells.map((a, i) => {
                     if(i >= column) return
-                    // if(a.idTypeCell === 2){
-                    //     return <PlaylistItem key={a.idObject} album={a} albumWidth={albumWidth} />
-                    // }
+                    if(a.idTypeCell === 2){
+                        return <AlbumItem key={a.idObject} album={a} albumWidth={albumWidth} type={2} />
+                    }
                     return <AlbumItem key={a.idObject} album={a} albumWidth={albumWidth} />
                 })}
             </div>
