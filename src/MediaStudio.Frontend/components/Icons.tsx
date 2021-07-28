@@ -8,12 +8,13 @@ interface Icons {
     className?: string;
     height?: string;
     width?: string;
+    action?: any;
 }
 
-const Icons: React.FC<Icons> = ({ name, color, size, className, height, width }): any => {
+const Icons: React.FC<Icons> = ({ name, color, size, className, height, width, action}): any => {
 
     return (
-        <svg className={`icon icon-${name} ${className}`} fill={color} stroke={'none'} width={width || size} height={height || size}>
+        <svg onClick={action} className={`icon icon-${name} ${className}`} fill={color} stroke={'none'} width={width || size} height={height || size}>
             <use xlinkHref={`${IconsSVG}#${name}`} />
         </svg>
     )

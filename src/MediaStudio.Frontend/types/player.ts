@@ -9,6 +9,12 @@ export interface PlayerState {
     idAlbum: number;
     idType?: number;
     queue: ITrack[];
+    repeat: boolean;
+    repeatOne: boolean;
+    isShuffle: boolean;
+    isNext: boolean;
+    isPrev: boolean;
+    linkCover: string;
 }
 
 export enum PlayerActionTypes {
@@ -19,13 +25,20 @@ export enum PlayerActionTypes {
     SET_CURRENT_TIME = 'SET_CURRENT_TIME',
     SET_VOLUME = 'SET_VOLUME',
     SET_QUEUE = 'SET_QUEUE',
-    SET_ID_ALBUM = 'SET_ID_ALBUM'
+    SET_ID_ALBUM = 'SET_ID_ALBUM',
+    SET_NEXT_TRUE = 'SET_NEXT_TRUE',
+    SET_NEXT_FALSE = 'SET_NEXT_FALSE',
+    SET_PREV_TRUE = 'SET_PREV_TRUE',
+    SET_PREV_FALSE = 'SET_PREV_FALSE',
+    SET_SHUFFLE_TRUE = 'SET_SHUFFLE_TRUE',
+    SET_SHUFFLE_FALSE = 'SET_SHUFFLE_FALSE',
 }
 
 export interface IQueue {
     queue: ITrack[],
     idAlbum: number,
-    idType: number
+    idType: number,
+    linkCover?: string
 }
 
 interface PlayAction {
@@ -56,9 +69,33 @@ interface SetQueueAction {
     payload: IQueue;
 }
 
-interface SetIdAlbum {
+interface SetIdAlbumAction {
     type: PlayerActionTypes.SET_ID_ALBUM,
     payload: ITrack[];
+}
+
+interface SetNextTrueAction {
+    type: PlayerActionTypes.SET_NEXT_TRUE
+}
+
+interface SetNextFalseAction {
+    type: PlayerActionTypes.SET_NEXT_FALSE
+}
+
+interface SetPrevTrueAction {
+    type: PlayerActionTypes.SET_PREV_TRUE
+}
+
+interface SetPrevFalseAction {
+    type: PlayerActionTypes.SET_PREV_FALSE
+}
+
+interface SetShuffleTrueAction {
+    type: PlayerActionTypes.SET_SHUFFLE_TRUE
+}
+
+interface SetShuffleFalseAction {
+    type: PlayerActionTypes.SET_SHUFFLE_FALSE
 }
 
 export type PlayerAction =
@@ -69,4 +106,10 @@ export type PlayerAction =
     | SetCurrentTimeAction
     | SetVolumeAction
     | SetQueueAction
-    | SetIdAlbum
+    | SetIdAlbumAction
+    | SetNextTrueAction
+    | SetNextFalseAction
+    | SetPrevTrueAction
+    | SetPrevFalseAction
+    | SetShuffleTrueAction
+    | SetShuffleFalseAction
