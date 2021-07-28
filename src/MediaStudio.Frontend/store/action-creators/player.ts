@@ -22,3 +22,21 @@ export const setActive = (payload: ITrack): PlayerAction => {
 export const setQueue = (payload: IQueue): PlayerAction => {
     return {type: PlayerActionTypes.SET_QUEUE, payload}
 }
+export const setIsNext = (): PlayerAction => {
+    return {type: PlayerActionTypes.SET_NEXT_TRUE}
+}
+export const setIsNextFalse = (): PlayerAction => {
+    return {type: PlayerActionTypes.SET_NEXT_FALSE}
+}
+export const setIsPrev = (): PlayerAction => {
+    return {type: PlayerActionTypes.SET_PREV_TRUE}
+}
+export const setIsPrevFalse = (): PlayerAction => {
+    return {type: PlayerActionTypes.SET_PREV_FALSE}
+}
+export const setShuffleTrue = (): PlayerAction => {
+    return {type: PlayerActionTypes.SET_SHUFFLE_TRUE}
+}
+export const setShuffleFalse = (): PlayerAction => {
+    return {type: PlayerActionTypes.SET_SHUFFLE_FALSE}
+}

@@ -3,9 +3,16 @@ import '../styles/globals.css'
 import App, {AppInitialProps, AppContext} from 'next/app';
 import {END} from 'redux-saga';
 import {SagaStore, wrapper} from '../store';
+import {useAudio} from "../hooks/useAudio";
+
+const WrapperAudio = () => {
+    useAudio()
+    return <div/>
+}
 
 class WrappedApp extends App<AppInitialProps> {
     public static getInitialProps = async ({Component, ctx}: AppContext) => {
+
         // 1. Wait for all page actions to dispatch
         const pageProps = {
             ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
@@ -25,24 +32,11 @@ class WrappedApp extends App<AppInitialProps> {
 
     public render() {
         const {Component, pageProps} = this.props;
-        return <Component {...pageProps} />;
+        return (<>
+            <Component {...pageProps} />
+            <WrapperAudio/>
+        </>);
     }
 }
 
 export default wrapper.withRedux(WrappedApp);
-
-
-
-
-
-// import '../styles/globals.css'
-// import React, {FC} from 'react';
-// import {AppProps} from 'next/app';
-// import {wrapper} from "../store";
-//
-//
-// const WrappedApp: FC<AppProps> = ({Component, pageProps}) => (
-//     <Component {...pageProps} />
-// );
-//
-// export default wrapper.withRedux(WrappedApp);

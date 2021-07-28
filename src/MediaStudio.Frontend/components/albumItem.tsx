@@ -8,9 +8,10 @@ import cover from '../public/images/coverDefault.png';
 interface IAlbum{
     album: IAlbumItem;
     albumWidth: number;
+    type?: number;
 }
 
-const AlbumItem: React.FC<IAlbum> = ({album, albumWidth}) => {
+const AlbumItem: React.FC<IAlbum> = ({album, albumWidth, type = 1}) => {
 
     const [coverLink, setCoverLink ] = useState(album.linkCover);
     const styleAlbumCover = {"--albumWidth": albumWidth + 4 +'px', display: 'block'}
@@ -19,9 +20,11 @@ const AlbumItem: React.FC<IAlbum> = ({album, albumWidth}) => {
         setCoverLink(cover);
     };
 
+    const typeAlbum = type && type === 1 ? 'album' : 'playlist'
+
     return (
         <div className={styles.albumContainer}>
-            <Link href={'/album/'+ album.idObject}>
+            <Link href={`/${typeAlbum}/`+ album.idObject}>
                 <a>
                     <div className={styles.albumCoverContainer} style={styleAlbumCover}>
                         <img className={styles.albumCover} src={coverLink || cover} alt={album.name} onError={coverError} loading={"lazy"}/>
@@ -30,7 +33,6 @@ const AlbumItem: React.FC<IAlbum> = ({album, albumWidth}) => {
                     <div className={styles.albumCountTrack}>{album.countTrack} треков</div>
                 </a>
             </Link>
-
         </div>
     );
 };

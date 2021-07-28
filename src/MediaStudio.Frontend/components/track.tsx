@@ -19,8 +19,6 @@ const Track: React.FC<Track> = ({ track, isMobile, play, isPlay }) => {
         setColorButton(isPlay ? '#0064ac' : '#B1AFAF')
     }, [isPlay])
 
-    console.log(isPlay)
-
 
     const isOpenMenu = false;
     return (
@@ -50,4 +48,4 @@ const Track: React.FC<Track> = ({ track, isMobile, play, isPlay }) => {
     );
 };
 
-export default Track;
+export default React.memo(Track);

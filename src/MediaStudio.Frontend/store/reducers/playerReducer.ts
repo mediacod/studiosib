@@ -3,11 +3,18 @@ import {PlayerAction, PlayerActionTypes, PlayerState} from "../../types/player";
 const initialState: PlayerState = {
     queue: [],
     idAlbum: null,
+    idType: null,
     pause: true,
     duration: 0,
     active: null,
     volume: 100,
-    currentTime: 0
+    currentTime: 0,
+    repeat: false,
+    repeatOne: false,
+    isShuffle: false,
+    isNext: false,
+    isPrev: false,
+    linkCover: ''
 }
 
 export const playerReducer = (state = initialState, action: PlayerAction): PlayerState => {
@@ -25,8 +32,19 @@ export const playerReducer = (state = initialState, action: PlayerAction): Playe
         case PlayerActionTypes.SET_ACTIVE:
             return {...state, active: action.payload, currentTime: 0, duration: 0}
         case PlayerActionTypes.SET_QUEUE:
-            console.log('red', action.payload)
-            return {...state, currentTime: 0, duration: 0}
+            return {...state, queue: action.payload.queue, idAlbum: action.payload.idAlbum, idType: action.payload.idType, currentTime: 0, duration: 0, linkCover: action.payload.linkCover}
+        case PlayerActionTypes.SET_NEXT_TRUE:
+            return {...state, isNext: true}
+        case PlayerActionTypes.SET_NEXT_FALSE:
+            return {...state, isNext: false}
+        case PlayerActionTypes.SET_PREV_TRUE:
+            return {...state, isPrev: true}
+        case PlayerActionTypes.SET_PREV_FALSE:
+            return {...state, isPrev: false}
+        case PlayerActionTypes.SET_SHUFFLE_TRUE:
+            return {...state, isShuffle: true}
+        case PlayerActionTypes.SET_SHUFFLE_FALSE:
+            return {...state, isShuffle: false}
         default: return state
     }
 }
