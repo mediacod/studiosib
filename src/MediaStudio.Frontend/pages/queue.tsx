@@ -28,7 +28,6 @@ const Queue = () => {
 
     return (
         <MainLayout>
-            <h3 className={styles.title}>{title}</h3>
             <div className={styles.container}>
                 <div className={styles.content}>
                     {queue?.map(track => <Track key={track.idTrack} track={track} isMobile={isMobile} play={play} isPlay={!pause && track.idTrack === active?.idTrack} />)}

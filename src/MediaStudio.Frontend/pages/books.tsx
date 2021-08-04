@@ -7,7 +7,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Books = () => {
 
-    useGetPage(3)
+    useGetPage(4)
     const {page} = useTypedSelector(state => state.page); 
     
     return (

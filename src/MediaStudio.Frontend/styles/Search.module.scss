@@ -1,0 +1,23 @@
+.container{
+  display: grid;
+  grid-template-columns: minmax(465px, 67%);
+  grid-auto-rows: 0;
+  margin: 100px -30px;
+  height: auto;
+  max-width: 1300px;
+}
+
+.infoContainer{
+    width: 100%;
+    height: 200px;
+}
+
+.content{
+    width: 100%;
+}
+
+.title{
+  margin: 50px 150px 0px;
+  font-weight: normal;
+  font-size: 25px;
+}

@@ -3,11 +3,13 @@ import {combineReducers} from "redux";
 import {playerReducer} from "./playerReducer";
 import {HYDRATE} from "next-redux-wrapper";
 import { pageReducer } from "./pageReducer";
+import {SearchReducer} from "./searchReducer";
 
 const rootReducer = combineReducers({
     player: playerReducer,
     page: pageReducer,
-    albumPage: AlbumPageReducer
+    albumPage: AlbumPageReducer,
+    search: SearchReducer,
 })
 
 export const reducer = (state, action) => {
