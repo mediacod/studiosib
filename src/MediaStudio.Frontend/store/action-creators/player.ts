@@ -40,3 +40,6 @@ export const setShuffleTrue = (): PlayerAction => {
 export const setShuffleFalse = (): PlayerAction => {
     return {type: PlayerActionTypes.SET_SHUFFLE_FALSE}
 }
+export const setIndexQueue = (payload: number): PlayerAction => {
+    return {type: PlayerActionTypes.SET_INDEX_QUEUE, payload}
+}

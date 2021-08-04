@@ -14,7 +14,8 @@ const initialState: PlayerState = {
     isShuffle: false,
     isNext: false,
     isPrev: false,
-    linkCover: ''
+    linkCover: '',
+    index: 0
 }
 
 export const playerReducer = (state = initialState, action: PlayerAction): PlayerState => {
@@ -45,6 +46,8 @@ export const playerReducer = (state = initialState, action: PlayerAction): Playe
             return {...state, isShuffle: true}
         case PlayerActionTypes.SET_SHUFFLE_FALSE:
             return {...state, isShuffle: false}
+        case PlayerActionTypes.SET_INDEX_QUEUE:
+            return {...state, index: action.payload}
         default: return state
     }
 }

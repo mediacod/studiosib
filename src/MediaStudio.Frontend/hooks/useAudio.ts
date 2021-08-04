@@ -19,7 +19,8 @@ export const useAudio = () => {
         repeatOne,
         isShuffle,
         isNext,
-        isPrev
+        isPrev,
+        linkCover
     } = useTypedSelector((state) => state.player);
     const {
         pauseTrack,
@@ -34,7 +35,6 @@ export const useAudio = () => {
     } = useActions();
 
     const [currentActive, setCurrentActive] = useState({idTrack: null})
-    const [restoreQueue, setRestoreQueue] = useState([])
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
@@ -87,10 +87,6 @@ export const useAudio = () => {
         }
     }, [isPrev]);
 
-    useEffect(()=>{
-        shuffle()
-    }, [isShuffle])
-
     const suspend = () => {
         audio.pause();
     }
@@ -121,27 +117,6 @@ export const useAudio = () => {
 
         playTrack();
     };
-
-    const shuffle = () => {
-
-        if (isShuffle) {
-            setRestoreQueue(queue)
-            const shuffleQueue = queue.sort(() => Math.random() - 0.5);
-            let currentId = queue?.findIndex(t => t.idTrack === active?.idTrack)
-
-            let currentTracks = shuffleQueue.splice(0, currentId);
-            console.log(isShuffle, currentTracks)
-            const newQueue = [...shuffleQueue, ...currentTracks]
-            setQueue({ queue: newQueue, idAlbum, idType })
-
-        }else {
-            console.log(isShuffle, restoreQueue)
-            let currentId = queue.findIndex(t => t.idTrack === active?.idTrack)
-            setQueue({ queue: restoreQueue, idAlbum, idType })
-            setIndex(currentId)
-            setRestoreQueue([])
-        }
-    }
 
     return;
 };
