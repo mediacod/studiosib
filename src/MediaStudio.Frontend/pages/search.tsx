@@ -9,7 +9,7 @@ import Track from "../components/track";
 import useMobileDetect from "../hooks/useUserAgent";
 import {useQueue} from "../hooks/useQueue";
 // @ts-ignore
-import cover from '../../MediaStudio.Frontend/public/images/coverDefault.png';
+import cover from '../public/images/coverDefault.png';
 
 const Search = () => {
 
@@ -45,8 +45,8 @@ const Search = () => {
         <MainLayout>
             <SectionLayout>
                 {status && <p>Ничего не найдено...</p>}
-                {data?.albums?.length > 0 && <Section title={'Альбомы'} cells={data.albums} />}
-                {data?.playlists?.length > 0 && <Section title={'Плейлисты'} cells={data.playlists} />}
+                {data?.albums?.length > 0 && <Section key={'Альбомы'} title={'Альбомы'} cells={data.albums} />}
+                {data?.playlists?.length > 0 && <Section key={'Плейлисты'} title={'Плейлисты'} cells={data.playlists} />}
                 {data?.tracks?.length > 0 &&
                 <div className={styles.container}>
                     <div className={styles.content}>
