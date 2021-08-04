@@ -24,3 +24,9 @@ export const playlistAPI = {
         return instance.get(`playlist/` + id)
     }
 };
+
+export const searchAPI = {
+    get(data) {
+        return instance.get(`page/search?filter=${data}`)
+    }
+};
