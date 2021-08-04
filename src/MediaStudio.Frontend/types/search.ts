@@ -3,7 +3,7 @@ import {ITrack} from "./track";
 import {ICells} from "./page";
 
 
-interface IDataSearch {
+export interface IDataSearch {
     albums: ICells[]
     perfomers: []
     playlists: ICells[]
