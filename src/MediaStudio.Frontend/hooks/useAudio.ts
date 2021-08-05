@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useActions} from "./useActions";
 import {useTypedSelector} from "./useTypedSelector";
 import {is} from "@babel/types";
+import {setNewTime} from "../store/action-creators/player";
 
 let audio: any;
 
@@ -20,7 +21,8 @@ export const useAudio = () => {
         isShuffle,
         isNext,
         isPrev,
-        linkCover
+        linkCover,
+        newTime
     } = useTypedSelector((state) => state.player);
     const {
         pauseTrack,
@@ -32,6 +34,7 @@ export const useAudio = () => {
         setQueue,
         setIsNextFalse,
         setIsPrevFalse,
+        setNewTime
     } = useActions();
 
     const [currentActive, setCurrentActive] = useState({idTrack: null})
@@ -87,6 +90,11 @@ export const useAudio = () => {
         }
     }, [isPrev]);
 
+    useEffect(() => {
+
+        if(newTime != 0) changeTime(newTime)
+    }, [newTime])
+
     const suspend = () => {
         audio.pause();
     }
@@ -117,6 +125,11 @@ export const useAudio = () => {
 
         playTrack();
     };
+
+    const changeTime = (data) => {
+        audio.currentTime = data * duration / 100;
+    }
+
 
     return;
 };
