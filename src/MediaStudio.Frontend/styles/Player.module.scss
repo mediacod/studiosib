@@ -152,11 +152,16 @@
 .progress{
 
   &Bar{
-    position: relative;
+    position: absolute;
     display: block;
-    height: 3px;
+    height: 5px;
     width: 100%;
     background-color: #D7D7D7;
+
+    &:hover{
+      height: 6px;
+      transition: .2s;
+    }
   }
 
   &Main{

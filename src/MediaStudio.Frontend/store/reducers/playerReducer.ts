@@ -15,7 +15,8 @@ const initialState: PlayerState = {
     isNext: false,
     isPrev: false,
     linkCover: '',
-    index: 0
+    index: 0,
+    newTime: 0
 }
 
 export const playerReducer = (state = initialState, action: PlayerAction): PlayerState => {
@@ -48,6 +49,8 @@ export const playerReducer = (state = initialState, action: PlayerAction): Playe
             return {...state, isShuffle: false}
         case PlayerActionTypes.SET_INDEX_QUEUE:
             return {...state, index: action.payload}
+        case PlayerActionTypes.SET_NEW_TIME:
+            return {...state, newTime: action.payload}
         default: return state
     }
 }

@@ -16,6 +16,7 @@ export interface PlayerState {
     isPrev: boolean;
     linkCover: string;
     index: number;
+    newTime: number;
 }
 
 export enum PlayerActionTypes {
@@ -33,7 +34,8 @@ export enum PlayerActionTypes {
     SET_PREV_FALSE = 'SET_PREV_FALSE',
     SET_SHUFFLE_TRUE = 'SET_SHUFFLE_TRUE',
     SET_SHUFFLE_FALSE = 'SET_SHUFFLE_FALSE',
-    SET_INDEX_QUEUE = 'SET_INDEX_QUEUE'
+    SET_INDEX_QUEUE = 'SET_INDEX_QUEUE',
+    SET_NEW_TIME = 'SET_NEW_TIME'
 }
 
 export interface IQueue {
@@ -105,6 +107,11 @@ interface SetIndexAudioAction {
     type: PlayerActionTypes.SET_INDEX_QUEUE
 }
 
+interface SetNewTimeAction {
+    payload: number;
+    type: PlayerActionTypes.SET_NEW_TIME
+}
+
 export type PlayerAction =
     PlayAction
     | PauseAction
@@ -121,3 +128,4 @@ export type PlayerAction =
     | SetShuffleTrueAction
     | SetShuffleFalseAction
     | SetIndexAudioAction
+    | SetNewTimeAction
