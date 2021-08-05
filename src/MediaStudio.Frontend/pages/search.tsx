@@ -13,10 +13,10 @@ import cover from '../public/images/coverDefault.png';
 
 const Search = () => {
 
-    const [randomId,  setRandomId] = useState(null)
-    const [status,  setStatus] = useState(null)
+    const [randomId, setRandomId] = useState(null)
+    const [status, setStatus] = useState(null)
     const {data} = useTypedSelector(state => state.search);
-    const { isMobile } = useMobileDetect();
+    const {isMobile} = useMobileDetect();
     const {playHandler} = useQueue()
 
     useEffect(() => {
@@ -45,12 +45,16 @@ const Search = () => {
         <MainLayout>
             <SectionLayout>
                 {status && <p>Ничего не найдено...</p>}
-                {data?.albums?.length > 0 && <Section key={'Альбомы'} title={'Альбомы'} cells={data.albums} idTypeCells={1} />}
-                {data?.playlists?.length > 0 && <Section key={'Плейлисты'} title={'Плейлисты'} cells={data.playlists} idTypeCells={2} />}
-                {data?.tracks?.length > 0 &&
+                {data?.albums.length > 0 &&
+                <Section key={'Альбомы'} title={'Альбомы'} cells={data.albums} idTypeCells={1}/>}
+                {data?.playlists.length > 0 &&
+                <Section key={'Плейлисты'} title={'Плейлисты'} cells={data.playlists} idTypeCells={2}/>}
+                {data?.tracks.length > 0 &&
                 <div className={styles.container}>
                     <div className={styles.content}>
-                        {data?.tracks.map(track => <Track key={track.idTrack} track={track} isMobile={isMobile} play={play} isPlay={!pause && track.idTrack === active?.idTrack} />)}
+                        {data?.tracks.map(track => <Track key={track.idTrack} track={track} isMobile={isMobile}
+                                                          play={play}
+                                                          isPlay={!pause && track.idTrack === active?.idTrack}/>)}
                     </div>
                 </div>}
             </SectionLayout>
