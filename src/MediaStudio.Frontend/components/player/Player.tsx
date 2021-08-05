@@ -53,8 +53,8 @@ const Player: React.FC = () => {
                             <img src={linkCover || cover} width={48} height={48} loading={"lazy"} />
                         </div>
                         <div className={styles.infoNameContainer}>
-                            <span className={styles.infoName}>Название трека</span>
-                            <span className={styles.infoArtist}>Исполнитель</span>
+                            <span className={styles.infoName}>{active ? active.name : ''}</span>
+                            <span className={styles.infoArtist}>{active ? 'Студия сибирского объединения' : ''}</span>
                         </div>
                     </div>
                     <div className={styles.actions}>

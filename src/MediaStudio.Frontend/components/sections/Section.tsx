@@ -2,10 +2,9 @@ import React, {useRef} from 'react';
 import AlbumItem from "../albumItem";
 import styles from "../../styles/Section.module.scss"
 import useCalcColumn from "../../hooks/useCalcColumn";
-import PlaylistItem from "../playlistItem";
 import {ICells} from "../../types/page";
 
-const Section: React.FC<{ title: string, cells: ICells[] }> = ({title, cells}) => {
+const Section: React.FC<{ title: string, cells: ICells[], idTypeCells?: number}> = ({title, cells, idTypeCells= 0}) => {
 
     const myRef = useRef()
     const { style, column, albumWidth } = useCalcColumn(myRef)

@@ -45,8 +45,8 @@ const Search = () => {
         <MainLayout>
             <SectionLayout>
                 {status && <p>Ничего не найдено...</p>}
-                {data?.albums?.length > 0 && <Section key={'Альбомы'} title={'Альбомы'} cells={data.albums} />}
-                {data?.playlists?.length > 0 && <Section key={'Плейлисты'} title={'Плейлисты'} cells={data.playlists} />}
+                {data?.albums?.length > 0 && <Section key={'Альбомы'} title={'Альбомы'} cells={data.albums} idTypeCells={1} />}
+                {data?.playlists?.length > 0 && <Section key={'Плейлисты'} title={'Плейлисты'} cells={data.playlists} idTypeCells={2} />}
                 {data?.tracks?.length > 0 &&
                 <div className={styles.container}>
                     <div className={styles.content}>
