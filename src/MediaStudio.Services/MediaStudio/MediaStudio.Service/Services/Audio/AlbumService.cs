@@ -51,6 +51,18 @@ namespace MediaStudioService
                 .AsQueryable();
         }
 
+        public async Task<SearchAlbumModel> GetAlbumByTypeAudio(int idTypeAudio)
+        {
+            return await postgres.Album
+                .AsNoTracking()
+                .Where(alb => alb.IdTypeAudio == idTypeAudio)
+                .Select(alb => new SearchAlbumModel
+                {
+                    IdAlbum = alb.IdAlbum,
+                    Name = alb.Name,      
+                }).FirstOrDefaultAsync();
+        }
+
         public async Task<SearchAlbumModel> GetAlbumByTrack(long idTrack)
         {
             if (!postgres.TrackToAlbum.Any(e => e.IdTrack == idTrack))
