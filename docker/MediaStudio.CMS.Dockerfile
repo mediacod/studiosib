@@ -7,7 +7,7 @@ EXPOSE 8082
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["MediaStudio.Services/MediaStudio.CMS/MediaStudio.CMS/MediaStudio.CMS.csproj", "MediaStudio.Services/MediaStudio.CMS/MediaStudio.CMS/"]
-COPY ["MediaStudio.Services/MediaStudio.CMS/MediaStudio.CMS.DBContext/MediaStudio.CMS.DBContext.csproj", "MediaStudio.Services/MediaStudio.CMS/MediaStudio.CMS.DBContext/"]
+COPY ["MediaStudio.Services/DBContext/DBContext.csproj", "MediaStudio.Services/DBContext/"]
 COPY ["MediaStudio.Services/MediaStudio.CMS/MediaStudio.CMS.Service/MediaStudio.CMS.Service.csproj", "MediaStudio.Services/MediaStudio.CMS/MediaStudio.CMS.Service/"]
 RUN dotnet restore "MediaStudio.Services/MediaStudio.CMS/MediaStudio.CMS/MediaStudio.CMS.csproj"
 COPY . .

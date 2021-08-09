@@ -19,5 +19,12 @@
             <param name="idTrack">Идентификатор трека.</param>
             <returns>Найденный альбом.</returns>
         </member>
+        <member name="M:MediaStudio.Controllers.AlbumController.ByTypeAudio(System.Int32)">
+            <summary>
+            Получить коллекцию альбомов по типу аудио.
+            </summary>
+            <param name="idTypeAudio">Идентификатор типа аудио.</param>
+            <returns>Найденные альбомы.</returns>
+        </member>
     </members>
 </doc>
