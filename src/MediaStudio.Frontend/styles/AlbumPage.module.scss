@@ -40,6 +40,7 @@
 
 .content{
     width: 100%;
+    margin-bottom: 70px;
 }
 
 
@@ -63,10 +64,16 @@
 .infoBlock{
   display: flex;
   justify-content: space-between;
+  padding: 0 30px;
 }
 
 .albumName {
   font-size: 18px;
   font-weight: 700;
   line-height: 25px;
+  text-align: center;
+}
+
+.albumArtistName {
+  text-align: center;
 }

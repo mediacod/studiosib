@@ -21,6 +21,7 @@ const MainLayout = ({children}) => {
                 <div className={styles.content}>
                     {children}
                 </div>
+                <Player/>
                 <NavMobile />
             </div>
         )
@@ -33,7 +34,7 @@ const MainLayout = ({children}) => {
             <div className={styles.content}>
                 {children}
             </div>
-            {!isMobile && <Player/>}
+            <Player/>
         </div>
     );
 };
