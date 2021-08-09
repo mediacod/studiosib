@@ -28,6 +28,10 @@
     font-weight: 400;
     line-height: 16px;
     color: #4B4B4B;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &Artist{
