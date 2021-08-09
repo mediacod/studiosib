@@ -8,6 +8,8 @@ import { convertHMS } from "../../utils/convertHMS";
 // @ts-ignore
 import cover from '../../public/images/coverDefault.png';
 import {setNewTime} from "../../store/action-creators/player";
+import useMobileDetect from "../../hooks/useUserAgent";
+import {MobilePlayer} from "./MobilePlayer";
 
 
 const Player: React.FC = () => {
@@ -18,6 +20,7 @@ const Player: React.FC = () => {
     const [onLock, setOnLock] = useState(false)
 
     const router = useRouter()
+    const {isMobile} = useMobileDetect();
 
     let playIcon = pause ? 'play' : 'pause'
     let trackProgress = currentTime && duration ? 100 / duration * currentTime : 0
@@ -83,6 +86,10 @@ const Player: React.FC = () => {
             let relativePosition = findPositional(e)
             trackProgress = relativePosition * 100
         }
+    }
+
+    if(isMobile) {
+        return active?.name ? <MobilePlayer key={1} name={active?.name} play={play} playIcon={playIcon} /> : <div/>
     }
 
     return (
