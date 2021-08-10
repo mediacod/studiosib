@@ -11,6 +11,7 @@ namespace DBContext.Models
             AlbumToProperties = new HashSet<AlbumToProperties>();
             SectionAlbum = new HashSet<SectionAlbum>();
             TrackToAlbum = new HashSet<TrackToAlbum>();
+            UserFavouritesAlbum = new HashSet<UserFavouritesAlbum>();
             UserHistoryAlbum = new HashSet<UserHistoryAlbum>();
         }
 
@@ -29,6 +30,7 @@ namespace DBContext.Models
         public virtual ICollection<AlbumToProperties> AlbumToProperties { get; set; }
         public virtual ICollection<SectionAlbum> SectionAlbum { get; set; }
         public virtual ICollection<TrackToAlbum> TrackToAlbum { get; set; }
+        public virtual ICollection<UserFavouritesAlbum> UserFavouritesAlbum { get; set; }
         public virtual ICollection<UserHistoryAlbum> UserHistoryAlbum { get; set; }
     }
 }
