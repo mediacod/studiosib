@@ -66,6 +66,14 @@ namespace MediaStudio.Service.Services.Audit
             CheckValidAccount(user.IdAccount);
         }
 
+        public void CheckValidIdUser(int idUser)
+        {
+            if (postgres.User.Any(user => user.IdUser == idUser))
+            {
+                throw new MyBadRequestException($"User c id {idUser} не существует!");
+            }
+        }
+
         public void CheckValidUser(User user)
         {
             if (postgres.User.Any(user => user.IdAccount == user.IdAccount))

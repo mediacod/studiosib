@@ -2,6 +2,7 @@
 {
     using DBContext.Connect;
     using MediaStudio.Service.Services.Audit;
+    using MediaStudio.Service.Services.UserHistory;
     using MediaStudioService;
     using MediaStudioService.AccountServic;
     using MediaStudioService.Builder.PageModelBuilder;
@@ -39,6 +40,11 @@
             services.AddAuthorization(options => PolicyManager.BuldAuthOption(Policy.FullPerformer, options));
             services.AddAuthorization(options => PolicyManager.BuldAuthOption(Policy.FullPlaylist, options));
             services.AddAuthorization(options => PolicyManager.BuldAuthOption(Policy.FullPage, options));
+        }
+
+        public static void AddUserHistory(this IServiceCollection services)
+        {
+            services.AddTransient<UserHistoryAlbumService>();
         }
 
         public static void AddAudit(this IServiceCollection services)

@@ -111,6 +111,35 @@ namespace MediaStudioService.AccountServic
                 .FirstOrDefault();
         }
 
+        public int GetIdAccountByLogin(string login)
+        {
+            if (!postgres.Account.Any(account => account.Login == login))
+            {
+                throw new MyNotFoundException($"Аккаунт c логином {login} отсуствует в БД!");
+            }
+
+            return postgres.Account
+                .AsNoTracking()
+                .Where(account => account.Login == login)
+                .Select(a => a.IdAccount)
+                .FirstOrDefault();
+        }
+
+        public int GetIdUserByLogin(string login)
+        {
+            if (!postgres.Account.Any(account => account.Login == login))
+            {
+                throw new MyNotFoundException($"Аккаунт c логином {login} отсуствует в БД!");
+            }
+
+            return postgres.Account
+                .AsNoTracking()
+                .Include(account => account.User)
+                .Where(account => account.Login == login)
+                .Select(a => a.User.IdUser)
+                .FirstOrDefault();
+        }
+
         public string DeleteAccount(string login, string executorLogin)
         {
             CheckLoginExist(login);
