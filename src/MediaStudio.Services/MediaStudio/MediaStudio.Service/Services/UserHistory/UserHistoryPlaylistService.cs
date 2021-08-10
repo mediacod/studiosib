@@ -2,41 +2,41 @@
 using DBContext.Models;
 using MediaStudio.Classes.MyException;
 using MediaStudio.Service.Services.Audit;
-using MediaStudioService;
 using MediaStudioService.AccountServic;
+using MediaStudioService.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace MediaStudio.Service.Services.UserHistory
 {
-    public class UserHistoryAlbumService
+    public class UserHistoryPlaylistService
     {
         private readonly MediaStudioContext _postgres;
         private readonly UserService _userService;
-        private readonly AlbumService _albumService;
+        private readonly PlaylistService _playlistService;
         private readonly AccountService _accountService;
 
-        public UserHistoryAlbumService(MediaStudioContext postgres, UserService userService, AlbumService albumService, AccountService accountService)
+        public UserHistoryPlaylistService(MediaStudioContext postgres, UserService userService, PlaylistService playlistService, AccountService accountService)
         {
             _postgres = postgres;
             _userService = userService;
-            _albumService = albumService;
+            _playlistService = playlistService;
             _accountService = accountService;
         }
 
-        public IEnumerable<UserHistoryAlbum> GetUserHistoryAlbums(string login)
+        public IEnumerable<UserHistoryPlaylist> GetUserHistoryPlaylists(string login)
         {
             var idAccount = _accountService.GetIdAccountByLogin(login);
-            return _postgres.UserHistoryAlbum.AsNoTracking()
-                .OrderByDescending(a => a.LastUse)
+            return _postgres.UserHistoryPlaylist.AsNoTracking()
+                .OrderByDescending(trHistory => trHistory.LastUse)
                 .Take(20)
                 .AsEnumerable();
         }
 
-        public long AddUserHistoryAlbum(int idAlbum, string login)
+        public long AddUserHistoryPlaylist(long idPlaylist, string login)
         {
-            _albumService.CheckAlbumExists(idAlbum);
+            _playlistService.CheckPlaylistExists(idPlaylist);
             var idUser = _accountService.GetIdUserByLogin(login);
 
             if (idUser == default)
@@ -44,16 +44,16 @@ namespace MediaStudio.Service.Services.UserHistory
                 throw new MyNotFoundException($"В базе данных не найден пользователь для логина {login}!");
             }
 
-            var historyAlbum = new UserHistoryAlbum
+            var historyPlaylist = new UserHistoryPlaylist
             {
-                IdAlbum = idAlbum,
+                IdPlaylist = idPlaylist,
                 IdUser = idUser,
             };
 
-            _postgres.UserHistoryAlbum.Add(historyAlbum);
+            _postgres.UserHistoryPlaylist.Add(historyPlaylist);
             _postgres.SaveChanges();
 
-            return historyAlbum.IdUserHistoryAlbum;
+            return historyPlaylist.IdUserHistoryPlaylist;
         }
     }
 }

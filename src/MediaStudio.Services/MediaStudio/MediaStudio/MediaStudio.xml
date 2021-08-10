@@ -59,5 +59,31 @@
             <param name="idAlbum">Идентификатор альбома для добавления в историю прослушивания.</param>
             <returns>Идентификатор истории пользователя альбома.</returns>
         </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryPlaylistController.Get">
+            <summary>
+            Получает список плейлистов, которые прослушал пользователь.
+            </summary>
+            <returns>Список плейлистов, которые прослушал пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryPlaylistController.Post(System.Int64)">
+            <summary>
+            Добавляет в историю прослушивания пользователем плейлист.
+            </summary>
+            <param name="idPlaylist">Идентификатор плейлиста для добавления в историю прослушивания.</param>
+            <returns>Идентификатор истории пользователя плейлиста.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryTrackController.Get">
+            <summary>
+            Получает список треков, которые прослушал пользователь.
+            </summary>
+            <returns>Список треков, которые прослушал пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryTrackController.Post(System.Int32)">
+            <summary>
+            Добавляет в историю прослушивания пользователем трек.
+            </summary>
+            <param name="idTrack">Идентификатор трека для добавления в историю прослушивания.</param>
+            <returns>Идентификатор истории пользователя трека.</returns>
+        </member>
     </members>
 </doc>

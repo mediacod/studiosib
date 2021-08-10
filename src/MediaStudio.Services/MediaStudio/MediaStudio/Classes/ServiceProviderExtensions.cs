@@ -45,6 +45,8 @@
         public static void AddUserHistory(this IServiceCollection services)
         {
             services.AddTransient<UserHistoryAlbumService>();
+            services.AddTransient<UserHistoryTrackService>();
+            services.AddTransient<UserHistoryPlaylistService>();
         }
 
         public static void AddAudit(this IServiceCollection services)
