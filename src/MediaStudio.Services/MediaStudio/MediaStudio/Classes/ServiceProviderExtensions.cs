@@ -2,6 +2,7 @@
 {
     using DBContext.Connect;
     using MediaStudio.Service.Services.Audit;
+    using MediaStudio.Service.Services.UserFavourites;
     using MediaStudio.Service.Services.UserHistory;
     using MediaStudioService;
     using MediaStudioService.AccountServic;
@@ -40,6 +41,13 @@
             services.AddAuthorization(options => PolicyManager.BuldAuthOption(Policy.FullPerformer, options));
             services.AddAuthorization(options => PolicyManager.BuldAuthOption(Policy.FullPlaylist, options));
             services.AddAuthorization(options => PolicyManager.BuldAuthOption(Policy.FullPage, options));
+        }
+
+        public static void AddUserFavourites(this IServiceCollection services)
+        {
+            services.AddTransient<UserFavouritesAlbumService>();
+            services.AddTransient<UserFavouritesTrackService>();
+            services.AddTransient<UserFavouritesPlaylistService>();
         }
 
         public static void AddUserHistory(this IServiceCollection services)
