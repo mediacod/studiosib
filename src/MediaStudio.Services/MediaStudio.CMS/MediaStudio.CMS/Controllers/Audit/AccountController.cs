@@ -26,9 +26,6 @@
         [HttpPost("SignUp")]
         public string SignUp(InputAccount inputAccount)
         {
-            //по умолчанию ставим роль "Пользователь"
-            inputAccount.IdTypeAccount = 4;
-
             return accountService.TryCreateAdminAccount(inputAccount, User.Identity.Name);
         }
 

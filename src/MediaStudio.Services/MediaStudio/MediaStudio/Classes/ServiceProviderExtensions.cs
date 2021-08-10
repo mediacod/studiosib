@@ -1,6 +1,7 @@
 ﻿namespace MediaStudio.Core
 {
     using DBContext.Connect;
+    using MediaStudio.Service.Services.Audit;
     using MediaStudioService;
     using MediaStudioService.AccountServic;
     using MediaStudioService.Builder.PageModelBuilder;
@@ -54,6 +55,7 @@
         {
             services.AddTransient<AuthService>();
             services.AddTransient<AccountService>();
+            services.AddTransient<UserService>();
 
             services.AddAuthentication(x =>
             {
@@ -82,7 +84,6 @@
             services.AddTransient<AlbumBuilderService>();
             services.AddTransient<PlaylistBuilderService>();
             services.AddTransient<TrackBuilderService>();
-
         }
 
         public static void AddInterfaceService(this IServiceCollection services)

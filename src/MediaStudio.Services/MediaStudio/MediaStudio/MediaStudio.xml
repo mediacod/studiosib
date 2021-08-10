@@ -26,5 +26,23 @@
             <param name="idTypeAudio">Идентификатор типа аудио.</param>
             <returns>Найденные альбомы.</returns>
         </member>
+        <member name="M:MediaStudio.Controllers.UserController.Get">
+            <summary>
+            Получает пользователя по текущему JWT.
+            </summary>
+            <returns>Пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserController.Put">
+            <summary>
+            Обновляет пользователя.
+            </summary>
+            <returns>Обновленный пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserController.Post(MediaStudio.Service.Models.Input.InputUser)">
+            <summary>
+            Создает нового пользователя.
+            </summary>
+            <param name="user">Новый пользователь.</param>
+        </member>
     </members>
 </doc>
