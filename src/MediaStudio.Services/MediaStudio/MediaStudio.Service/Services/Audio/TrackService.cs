@@ -157,7 +157,7 @@ namespace MediaStudioService
                 throw new MyNotFoundException($"Ошибка! В БД отсуствует альбом с ID {inputTrack.IdAlbum}!");
         }
 
-        private void CheckTrackExists(long idTrack)
+        public void CheckTrackExists(long idTrack)
         {
             if (!postgres.Track.Any(e => e.IdTrack == idTrack))
                 throw new MyNotFoundException($"Ошибка! В базе данных не найден трек с id {idTrack}!");

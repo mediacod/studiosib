@@ -10,33 +10,33 @@ using System.Linq;
 
 namespace MediaStudio.Service.Services.UserHistory
 {
-    public class UserHistoryAlbumService
+    public class UserHistoryTrackService
     {
         private readonly MediaStudioContext _postgres;
         private readonly UserService _userService;
-        private readonly AlbumService _albumService;
+        private readonly TrackService _trackService;
         private readonly AccountService _accountService;
 
-        public UserHistoryAlbumService(MediaStudioContext postgres, UserService userService, AlbumService albumService, AccountService accountService)
+        public UserHistoryTrackService(MediaStudioContext postgres, UserService userService, TrackService trackService, AccountService accountService)
         {
             _postgres = postgres;
             _userService = userService;
-            _albumService = albumService;
+            _trackService = trackService;
             _accountService = accountService;
         }
 
-        public IEnumerable<UserHistoryAlbum> GetUserHistoryAlbums(string login)
+        public IEnumerable<UserHistoryTrack> GetUserHistoryTracks(string login)
         {
             var idAccount = _accountService.GetIdAccountByLogin(login);
-            return _postgres.UserHistoryAlbum.AsNoTracking()
-                .OrderByDescending(a => a.LastUse)
-                .Take(20)
+            return _postgres.UserHistoryTrack.AsNoTracking()
+                .OrderByDescending(trHistory => trHistory.LastUse)
+                .Take(50)
                 .AsEnumerable();
         }
 
-        public long AddUserHistoryAlbum(int idAlbum, string login)
+        public long AddUserHistoryTrack(long idTrack, string login)
         {
-            _albumService.CheckAlbumExists(idAlbum);
+            _trackService.CheckTrackExists(idTrack);
             var idUser = _accountService.GetIdUserByLogin(login);
 
             if (idUser == default)
@@ -44,16 +44,16 @@ namespace MediaStudio.Service.Services.UserHistory
                 throw new MyNotFoundException($"В базе данных не найден пользователь для логина {login}!");
             }
 
-            var historyAlbum = new UserHistoryAlbum
+            var historyTrack = new UserHistoryTrack
             {
-                IdAlbum = idAlbum,
+                IdTrack = idTrack,
                 IdUser = idUser,
             };
 
-            _postgres.UserHistoryAlbum.Add(historyAlbum);
+            _postgres.UserHistoryTrack.Add(historyTrack);
             _postgres.SaveChanges();
 
-            return historyAlbum.IdUserHistoryAlbum;
+            return historyTrack.IdUserHistoryTrack;
         }
     }
 }
