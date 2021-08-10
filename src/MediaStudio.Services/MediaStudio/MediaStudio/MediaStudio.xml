@@ -46,6 +46,45 @@
             <param name="user">Новый пользователь.</param>
             <returns>Идентификатор пользователя.</returns>
         </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesAlbumController.Get">
+            <summary>
+            Получает список избранных альбомов для текущего пользователя.
+            </summary>
+            <returns>Список избранных альбомов текущего пользователя.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesAlbumController.Post(System.Int32)">
+            <summary>
+            Добвляет в избранное пользователя альбом.
+            </summary>
+            <param name="idAlbum">Идентификатор альбома для добавления в избранное пользователя.</param>
+            <returns>Идентификатор избранного альбома пользователем.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesPlaylistController.Get">
+            <summary>
+            Получает список избранных плейлистов для текущего пользователя.
+            </summary>
+            <returns>Список избранных плейлистов текущего пользователя.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesPlaylistController.Post(System.Int64)">
+            <summary>
+            Добавляет в избранное пользователя плейлист.
+            </summary>
+            <param name="idPlaylist">Идентификатор плейлиста для добавления в избранное пользователя.</param>
+            <returns>Идентификатор избранного плейлиста пользователя .</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesTrackController.Get">
+            <summary>
+            Получает список избранных треков для текущего пользователя.
+            </summary>
+            <returns>Список избранных треков текущего пользователя.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesTrackController.Post(System.Int32)">
+            <summary>
+            Добавляет в избранное пользователя трек.
+            </summary>
+            <param name="idTrack">Идентификатор трека для добавления в избранное пользователя.</param>
+            <returns>Идентификатор избраного трека пользователя.</returns>
+        </member>
         <member name="M:MediaStudio.Controllers.UserHistoryAlbumController.Get">
             <summary>
             Получает список альбомов, которые прослушал пользователь.
