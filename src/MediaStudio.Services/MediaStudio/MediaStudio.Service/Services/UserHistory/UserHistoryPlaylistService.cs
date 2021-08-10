@@ -3,10 +3,14 @@ using DBContext.Models;
 using MediaStudio.Classes.MyException;
 using MediaStudio.Service.Services.Audit;
 using MediaStudioService.AccountServic;
+using MediaStudioService.Core.Enums;
+using MediaStudioService.Models.PageModels;
+using MediaStudioService.Service.ResourceService;
 using MediaStudioService.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MediaStudio.Service.Services.UserHistory
 {
@@ -16,22 +20,36 @@ namespace MediaStudio.Service.Services.UserHistory
         private readonly UserService _userService;
         private readonly PlaylistService _playlistService;
         private readonly AccountService _accountService;
+        private readonly PlaylistMinioService _minioService;
 
-        public UserHistoryPlaylistService(MediaStudioContext postgres, UserService userService, PlaylistService playlistService, AccountService accountService)
+
+        public UserHistoryPlaylistService(MediaStudioContext postgres, UserService userService, PlaylistService playlistService, AccountService accountService, PlaylistMinioService minioService)
         {
             _postgres = postgres;
             _userService = userService;
             _playlistService = playlistService;
             _accountService = accountService;
+            _minioService = minioService;
         }
 
-        public IEnumerable<UserHistoryPlaylist> GetUserHistoryPlaylists(string login)
+        public async Task<PagePlaylist> GetUserHistoryPlaylists(string login)
         {
             var idAccount = _accountService.GetIdAccountByLogin(login);
-            return _postgres.UserHistoryPlaylist.AsNoTracking()
+            return await _postgres.UserHistoryPlaylist.AsNoTracking()
                 .OrderByDescending(trHistory => trHistory.LastUse)
                 .Take(20)
-                .AsEnumerable();
+                .Select(playlist => new PagePlaylist
+                {
+                    IdPlaylist = playlist.IdPlaylist,
+                    Name = playlist.IdPlaylistNavigation.Name,
+                    ColourCode = playlist.IdPlaylistNavigation.IdColourNavigation.Code,
+                    LinkCover = _minioService.MinioURL + playlist.IdPlaylistNavigation.PlaylistStorage
+                   .Where(playlistStorage => playlistStorage.IdPlaylist == playlist.IdPlaylist
+                        && playlistStorage.IdStorageNavigation.IdBucket == (int)BucketTypes.playliscovermedium)
+                        .Select(playlistStorage => playlistStorage.IdStorageNavigation.StaticUrl)
+                        .FirstOrDefault(),
+                    Tracks = null,
+                }).FirstOrDefaultAsync();
         }
 
         public long AddUserHistoryPlaylist(long idPlaylist, string login)

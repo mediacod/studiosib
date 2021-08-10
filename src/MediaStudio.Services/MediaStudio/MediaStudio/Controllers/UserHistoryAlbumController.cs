@@ -1,9 +1,11 @@
 ﻿namespace MediaStudio.Controllers
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using DBContext.Models;
     using MediaStudio.Service.Models.Input;
     using MediaStudio.Service.Services.UserHistory;
+    using MediaStudioService.ApiModels;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("[controller]")]
@@ -22,9 +24,9 @@
         /// </summary>
         /// <returns>Список альбомов, которые прослушал пользователь.</returns>
         [HttpGet]
-        public IEnumerable<UserHistoryAlbum> Get()
+        public async Task<PageAlbum> Get()
         {
-            return _historyAlbumService.GetUserHistoryAlbums(User.Identity.Name);
+            return await _historyAlbumService.GetUserHistoryAlbums(User.Identity.Name);
         }
 
         /// <summary>

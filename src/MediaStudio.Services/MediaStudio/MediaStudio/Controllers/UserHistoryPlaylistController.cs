@@ -1,8 +1,10 @@
 ﻿namespace MediaStudio.Controllers
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using DBContext.Models;
     using MediaStudio.Service.Services.UserHistory;
+    using MediaStudioService.Models.PageModels;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("[controller]")]
@@ -21,9 +23,9 @@
         /// </summary>
         /// <returns>Список плейлистов, которые прослушал пользователь.</returns>
         [HttpGet]
-        public IEnumerable<UserHistoryPlaylist> Get()
+        public async Task<PagePlaylist> Get()
         {
-            return _historyPlaylistService.GetUserHistoryPlaylists(User.Identity.Name);
+            return await _historyPlaylistService.GetUserHistoryPlaylists(User.Identity.Name);
         }
 
         /// <summary>

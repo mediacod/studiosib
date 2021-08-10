@@ -1,8 +1,10 @@
 ﻿namespace MediaStudio.Controllers
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using DBContext.Models;
     using MediaStudio.Service.Services.UserFavourites;
+    using MediaStudioService.Models.PageModels;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("[controller]")]
@@ -21,9 +23,9 @@
         /// </summary>
         /// <returns>Список избранных плейлистов текущего пользователя.</returns>
         [HttpGet]
-        public IEnumerable<UserFavouritesPlaylist> Get()
+        public async Task<PagePlaylist> Get()
         {
-            return _historyPlaylistService.GetUserFavouritesPlaylists(User.Identity.Name);
+            return await _historyPlaylistService.GetUserFavouritesPlaylists(User.Identity.Name);
         }
 
         /// <summary>
