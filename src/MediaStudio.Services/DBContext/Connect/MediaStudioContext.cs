@@ -1149,12 +1149,14 @@ namespace DBContext.Connect
 
             modelBuilder.Entity<UserHistoryAlbum>(entity =>
             {
-                entity.HasKey(e => e.IdUserHistoryTrack)
+                entity.HasKey(e => e.IdUserHistoryAlbum)
                     .HasName("user_history_album_pkey");
 
                 entity.ToTable("user_history_album", "user_history");
 
-                entity.Property(e => e.IdUserHistoryTrack).HasColumnName("id_user_history_track");
+                entity.Property(e => e.IdUserHistoryAlbum)
+                    .HasColumnName("id_user_history_album")
+                    .HasDefaultValueSql("nextval('user_history.user_history_album_id_user_history_track_seq'::regclass)");
 
                 entity.Property(e => e.IdAlbum).HasColumnName("id_album");
 
@@ -1180,12 +1182,14 @@ namespace DBContext.Connect
 
             modelBuilder.Entity<UserHistoryPlaylist>(entity =>
             {
-                entity.HasKey(e => e.IdUserHistoryTrack)
+                entity.HasKey(e => e.IdUserHistoryPlaylist)
                     .HasName("user_history_playlist_pkey");
 
                 entity.ToTable("user_history_playlist", "user_history");
 
-                entity.Property(e => e.IdUserHistoryTrack).HasColumnName("id_user_history_track");
+                entity.Property(e => e.IdUserHistoryPlaylist)
+                    .HasColumnName("id_user_history_playlist")
+                    .HasDefaultValueSql("nextval('user_history.user_history_playlist_id_user_history_track_seq'::regclass)");
 
                 entity.Property(e => e.IdPlaylist).HasColumnName("id_playlist");
 

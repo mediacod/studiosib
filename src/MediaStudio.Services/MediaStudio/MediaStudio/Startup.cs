@@ -60,6 +60,7 @@ namespace MediaStudio
             services.AddAuthenticationUser(Configuration);
             services.AddCustomAuthorization();
             services.AddAudit();
+            services.AddUserHistory();
             services.AddBuilderService();
             services.AddCloudService();
             services.AddPathCloudService();

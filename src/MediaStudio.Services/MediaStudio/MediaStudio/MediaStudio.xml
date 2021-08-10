@@ -46,5 +46,18 @@
             <param name="user">Новый пользователь.</param>
             <returns>Идентификатор пользователя.</returns>
         </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryAlbumController.Get">
+            <summary>
+            Получает список альбомов, которые прослушал пользователь.
+            </summary>
+            <returns>Список альбомов, которые прослушал пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryAlbumController.Post(System.Int32)">
+            <summary>
+            Добавляет в историю прослушивания пользователем альбом.
+            </summary>
+            <param name="idAlbum">Идентификатор альбома для добавления в историю прослушивания.</param>
+            <returns>Идентификатор истории пользователя альбома.</returns>
+        </member>
     </members>
 </doc>

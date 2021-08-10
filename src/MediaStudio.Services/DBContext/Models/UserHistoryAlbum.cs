@@ -5,7 +5,7 @@ namespace DBContext.Models
 {
     public partial class UserHistoryAlbum
     {
-        public long IdUserHistoryTrack { get; set; }
+        public long IdUserHistoryAlbum { get; set; }
         public int IdAlbum { get; set; }
         public int IdUser { get; set; }
         public DateTime LastUse { get; set; }

@@ -320,7 +320,7 @@ namespace MediaStudioService
             return await postgres.Album.FindAsync(idAlbum);
         }
 
-        private void CheckAlbumExists(int id)
+        public void CheckAlbumExists(int id)
         {
             if (!postgres.Album.Any(e => e.IdAlbum == id))
                 throw new MyNotFoundException($"Ошибка! В базе данных не найден альбом с id {id}!");
