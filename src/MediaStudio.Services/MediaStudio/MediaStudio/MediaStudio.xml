@@ -32,17 +32,19 @@
             </summary>
             <returns>Пользователь.</returns>
         </member>
-        <member name="M:MediaStudio.Controllers.UserController.Put">
+        <member name="M:MediaStudio.Controllers.UserController.Put(MediaStudio.Service.Models.Input.UpdateUserModel)">
             <summary>
             Обновляет пользователя.
             </summary>
+            <param name="user">Обновленный пользователь.</param>
             <returns>Обновленный пользователь.</returns>
         </member>
-        <member name="M:MediaStudio.Controllers.UserController.Post(MediaStudio.Service.Models.Input.InputUser)">
+        <member name="M:MediaStudio.Controllers.UserController.Post(MediaStudio.Service.Models.Input.UserModel)">
             <summary>
             Создает нового пользователя.
             </summary>
             <param name="user">Новый пользователь.</param>
+            <returns>Идентификатор пользователя.</returns>
         </member>
     </members>
 </doc>

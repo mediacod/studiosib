@@ -5,7 +5,7 @@
     using MediaStudio.Service.Services.Audit;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -29,20 +29,21 @@
         /// <summary>
         /// Обновляет пользователя.
         /// </summary>
+        /// <param name="user">Обновленный пользователь.</param>
         /// <returns>Обновленный пользователь.</returns>
         [HttpPut]
-        public User Put()
+        public UserUpdateEvent Put(UpdateUserModel user)
         {
-            return _userService.GetUser(User.Identity.Name);
+            return _userService.UpdateUser(user, User.Identity.Name);
         }
 
         /// <summary>
         /// Создает нового пользователя.
         /// </summary>
         /// <param name="user">Новый пользователь.</param>
-        /// <returns>Идентификатор пользователя</returns>
+        /// <returns>Идентификатор пользователя.</returns>
         [HttpPost]
-        public int Post(InputUser user)
+        public int Post(UserModel user)
         {
             return _userService.PostUser(user);
         }

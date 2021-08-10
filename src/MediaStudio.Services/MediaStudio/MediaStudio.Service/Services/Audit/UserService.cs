@@ -3,7 +3,6 @@ using DBContext.Models;
 using MediaStudio.Classes.MyException;
 using MediaStudio.Service.Models.Input;
 using MediaStudioService.AccountServic;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace MediaStudio.Service.Services.Audit
@@ -18,7 +17,7 @@ namespace MediaStudio.Service.Services.Audit
             postgres = context;
             _accountService = accountService;
         }
-        public int PostUser(InputUser user)
+        public int PostUser(UserModel user)
         {
             CheckValidUser(user);
             postgres.User.Add(
@@ -37,27 +36,27 @@ namespace MediaStudio.Service.Services.Audit
             return user.IdUser;
         }
 
-        public User UpdateUser(User newUser, string login)
+        public UserUpdateEvent UpdateUser(UpdateUserModel user, string login)
         {
-            CheckValidUser(newUser);
-
             var account = _accountService.GetAccountByLogin(login);
-            if (account.User.IdUser != newUser.IdUser)
-            {
-                throw new MyBadRequestException($"Обновляемый идентификатор user не принадлежит  пользователю текущего логину из токена {login}!");
-            }
-            account.User = newUser;
+            account.User.Gender = user.Gender;
+            account.User.DateBirthday = user.DateBirthday;
+            account.User.LastName = user.LastName;
+            account.User.Patronymic = user.Patronymic;
+            account.User.PhoneNumber = user.PhoneNumber;       
+            postgres.User.Update(account.User);
             postgres.SaveChanges();
-            return newUser;
+            return new UserUpdateEvent();
         }
 
         public User GetUser(string login)
         {
             var account = _accountService.GetAccountByLogin(login);
+            account.Password = null;
             return account.User;
         }
 
-        public void CheckValidUser(InputUser user)
+        public void CheckValidUser(UserModel user)
         {
             if(postgres.User.Any(user => user.IdAccount == user.IdAccount))
             {
