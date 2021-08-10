@@ -11,6 +11,7 @@ namespace DBContext.Models
             PlaylistToProperties = new HashSet<PlaylistToProperties>();
             SectionPlaylist = new HashSet<SectionPlaylist>();
             TrackToPlaylist = new HashSet<TrackToPlaylist>();
+            UserFavouritesPlaylist = new HashSet<UserFavouritesPlaylist>();
             UserHistoryPlaylist = new HashSet<UserHistoryPlaylist>();
         }
 
@@ -26,6 +27,7 @@ namespace DBContext.Models
         public virtual ICollection<PlaylistToProperties> PlaylistToProperties { get; set; }
         public virtual ICollection<SectionPlaylist> SectionPlaylist { get; set; }
         public virtual ICollection<TrackToPlaylist> TrackToPlaylist { get; set; }
+        public virtual ICollection<UserFavouritesPlaylist> UserFavouritesPlaylist { get; set; }
         public virtual ICollection<UserHistoryPlaylist> UserHistoryPlaylist { get; set; }
     }
 }

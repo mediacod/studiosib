@@ -51,6 +51,9 @@ namespace DBContext.Connect
         public virtual DbSet<TypeAccount> TypeAccount { get; set; }
         public virtual DbSet<TypeAudio> TypeAudio { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserFavouritesAlbum> UserFavouritesAlbum { get; set; }
+        public virtual DbSet<UserFavouritesPlaylist> UserFavouritesPlaylist { get; set; }
+        public virtual DbSet<UserFavouritesTrack> UserFavouritesTrack { get; set; }
         public virtual DbSet<UserHistoryAlbum> UserHistoryAlbum { get; set; }
         public virtual DbSet<UserHistoryPlaylist> UserHistoryPlaylist { get; set; }
         public virtual DbSet<UserHistoryTrack> UserHistoryTrack { get; set; }
@@ -1145,6 +1148,90 @@ namespace DBContext.Connect
                     .HasForeignKey<User>(d => d.IdAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("User_fk");
+            });
+
+            modelBuilder.Entity<UserFavouritesAlbum>(entity =>
+            {
+                entity.HasKey(e => e.IdUserFavouritesAlbum)
+                    .HasName("user_favourites_album_pkey");
+
+                entity.ToTable("user_favourites_album", "user_favorites");
+
+                entity.Property(e => e.IdUserFavouritesAlbum)
+                    .HasColumnName("id_user_favourites_album")
+                    .HasDefaultValueSql("nextval('user_favorites.user_favourites_album_id_user_favourites_track_seq'::regclass)");
+
+                entity.Property(e => e.IdAlbum).HasColumnName("id_album");
+
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+                entity.HasOne(d => d.IdAlbumNavigation)
+                    .WithMany(p => p.UserFavouritesAlbum)
+                    .HasForeignKey(d => d.IdAlbum)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_favourites_album_fk");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.UserFavouritesAlbum)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_favourites_album_fk1");
+            });
+
+            modelBuilder.Entity<UserFavouritesPlaylist>(entity =>
+            {
+                entity.HasKey(e => e.IdUserFavouritesPlaylist)
+                    .HasName("user_favourites_playlist_pkey");
+
+                entity.ToTable("user_favourites_playlist", "user_favorites");
+
+                entity.Property(e => e.IdUserFavouritesPlaylist)
+                    .HasColumnName("id_user_favourites_playlist")
+                    .HasDefaultValueSql("nextval('user_favorites.user_favourites_playlist_id_user_favourites_track_seq'::regclass)");
+
+                entity.Property(e => e.IdPlaylist).HasColumnName("id_playlist");
+
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+                entity.HasOne(d => d.IdPlaylistNavigation)
+                    .WithMany(p => p.UserFavouritesPlaylist)
+                    .HasForeignKey(d => d.IdPlaylist)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_favourites_playlist_fk");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.UserFavouritesPlaylist)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_favourites_playlist_fk1");
+            });
+
+            modelBuilder.Entity<UserFavouritesTrack>(entity =>
+            {
+                entity.HasKey(e => e.IdUserFavouritesTrack)
+                    .HasName("user_favourites_track_pkey");
+
+                entity.ToTable("user_favourites_track", "user_favorites");
+
+                entity.Property(e => e.IdUserFavouritesTrack)
+                    .HasColumnName("id_user_favourites_track")
+                    .HasDefaultValueSql("nextval('user_favorites.user_favourites_track_id_user_history_track_seq'::regclass)");
+
+                entity.Property(e => e.IdTrack).HasColumnName("id_track");
+
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+                entity.HasOne(d => d.IdTrackNavigation)
+                    .WithMany(p => p.UserFavouritesTrack)
+                    .HasForeignKey(d => d.IdTrack)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_favourites_track_fk");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.UserFavouritesTrack)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_favourites_track_fk1");
             });
 
             modelBuilder.Entity<UserHistoryAlbum>(entity =>
