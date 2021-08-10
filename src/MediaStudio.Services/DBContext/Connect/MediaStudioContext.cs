@@ -52,9 +52,6 @@ namespace DBContext.Connect
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -354,7 +351,7 @@ namespace DBContext.Connect
 
                 entity.Property(e => e.NameTrack)
                     .HasColumnName("name_track")
-                    .HasMaxLength(70);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.OldValue).HasColumnName("old_value");
 
@@ -752,10 +749,6 @@ namespace DBContext.Connect
 
                 entity.ToTable("section", "interface");
 
-                entity.HasIndex(e => e.Name)
-                    .HasName("section_name_key")
-                    .IsUnique();
-
                 entity.Property(e => e.IdSection)
                     .HasColumnName("id_section")
                     .HasDefaultValueSql("nextval('interface.section_section_seq'::regclass)");
@@ -922,7 +915,7 @@ namespace DBContext.Connect
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
-                    .HasMaxLength(70);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.PublicationTime)
                     .HasColumnName("publication_time")
@@ -1096,8 +1089,8 @@ namespace DBContext.Connect
 
                 entity.ToTable("User", "service");
 
-                entity.HasIndex(e => e.Login)
-                    .HasName("User_login_key")
+                entity.HasIndex(e => e.IdAccount)
+                    .HasName("User_id_account_key")
                     .IsUnique();
 
                 entity.Property(e => e.IdUser).HasColumnName("id_user");
@@ -1116,6 +1109,8 @@ namespace DBContext.Connect
                     .HasColumnName("gender")
                     .HasComment("пол");
 
+                entity.Property(e => e.IdAccount).HasColumnName("id_account");
+
                 entity.Property(e => e.IdCloudPath)
                     .HasColumnName("id_cloud_path")
                     .HasComment("ссылка на id картинки профиля");
@@ -1124,11 +1119,6 @@ namespace DBContext.Connect
                     .HasColumnName("last_name")
                     .HasMaxLength(18)
                     .HasComment("фамилия");
-
-                entity.Property(e => e.Login)
-                    .IsRequired()
-                    .HasColumnName("login")
-                    .HasMaxLength(50);
 
                 entity.Property(e => e.Patronymic)
                     .HasColumnName("patronymic")
@@ -1140,10 +1130,9 @@ namespace DBContext.Connect
                     .HasMaxLength(20)
                     .HasComment("номер телефона");
 
-                entity.HasOne(d => d.LoginNavigation)
+                entity.HasOne(d => d.IdAccountNavigation)
                     .WithOne(p => p.User)
-                    .HasPrincipalKey<Account>(p => p.Login)
-                    .HasForeignKey<User>(d => d.Login)
+                    .HasForeignKey<User>(d => d.IdAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("User_fk");
             });

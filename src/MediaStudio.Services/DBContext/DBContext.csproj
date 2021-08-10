@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Connect\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="DBContext.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
