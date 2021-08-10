@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using DBContext.Models;
 
 namespace DBContext.Connect
@@ -49,9 +51,17 @@ namespace DBContext.Connect
         public virtual DbSet<TypeAccount> TypeAccount { get; set; }
         public virtual DbSet<TypeAudio> TypeAudio { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserHistoryAlbum> UserHistoryAlbum { get; set; }
+        public virtual DbSet<UserHistoryPlaylist> UserHistoryPlaylist { get; set; }
+        public virtual DbSet<UserHistoryTrack> UserHistoryTrack { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseNpgsql("Server=185.248.102.115; Port=5432; Database=mediastudio; User Id=postgres; Password=ft5tf&XuwRe4Db;CommandTimeout=300;Pooling=false;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1135,6 +1145,99 @@ namespace DBContext.Connect
                     .HasForeignKey<User>(d => d.IdAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("User_fk");
+            });
+
+            modelBuilder.Entity<UserHistoryAlbum>(entity =>
+            {
+                entity.HasKey(e => e.IdUserHistoryTrack)
+                    .HasName("user_history_album_pkey");
+
+                entity.ToTable("user_history_album", "user_history");
+
+                entity.Property(e => e.IdUserHistoryTrack).HasColumnName("id_user_history_track");
+
+                entity.Property(e => e.IdAlbum).HasColumnName("id_album");
+
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+                entity.Property(e => e.LastUse)
+                    .HasColumnName("last_use")
+                    .HasColumnType("timestamp(0) without time zone")
+                    .HasDefaultValueSql("now()");
+
+                entity.HasOne(d => d.IdAlbumNavigation)
+                    .WithMany(p => p.UserHistoryAlbum)
+                    .HasForeignKey(d => d.IdAlbum)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_history_album_fk");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.UserHistoryAlbum)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_history_album_fk1");
+            });
+
+            modelBuilder.Entity<UserHistoryPlaylist>(entity =>
+            {
+                entity.HasKey(e => e.IdUserHistoryTrack)
+                    .HasName("user_history_playlist_pkey");
+
+                entity.ToTable("user_history_playlist", "user_history");
+
+                entity.Property(e => e.IdUserHistoryTrack).HasColumnName("id_user_history_track");
+
+                entity.Property(e => e.IdPlaylist).HasColumnName("id_playlist");
+
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+                entity.Property(e => e.LastUse)
+                    .HasColumnName("last_use")
+                    .HasColumnType("timestamp(0) without time zone")
+                    .HasDefaultValueSql("now()");
+
+                entity.HasOne(d => d.IdPlaylistNavigation)
+                    .WithMany(p => p.UserHistoryPlaylist)
+                    .HasForeignKey(d => d.IdPlaylist)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_history_playlist_fk");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.UserHistoryPlaylist)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_history_playlist_fk1");
+            });
+
+            modelBuilder.Entity<UserHistoryTrack>(entity =>
+            {
+                entity.HasKey(e => e.IdUserHistoryTrack)
+                    .HasName("user_history_track_pkey");
+
+                entity.ToTable("user_history_track", "user_history");
+
+                entity.Property(e => e.IdUserHistoryTrack).HasColumnName("id_user_history_track");
+
+                entity.Property(e => e.IdTrack).HasColumnName("id_track");
+
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+                entity.Property(e => e.LastUse)
+                    .HasColumnName("last_use")
+                    .HasColumnType("timestamp(0) without time zone")
+                    .HasDefaultValueSql("now()");
+
+                entity.HasOne(d => d.IdTrackNavigation)
+                    .WithMany(p => p.UserHistoryTrack)
+                    .HasForeignKey(d => d.IdTrack)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_history_track_fk");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.UserHistoryTrack)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("user_history_track_fk1");
             });
 
             modelBuilder.HasSequence("audit_performer_id_audit_performer_seq", "user_audit");
