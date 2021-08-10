@@ -99,7 +99,7 @@ namespace MediaStudioService.AccountServic
 
         public Account GetAccountByLogin(string login)
         {
-            if (postgres.Account.Any(account => account.Login == login))
+            if (!postgres.Account.Any(account => account.Login == login))
             {
                 throw new MyNotFoundException($"Аккаунт c логином {login} отсуствует в БД!");
             }
