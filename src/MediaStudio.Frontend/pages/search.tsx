@@ -10,6 +10,7 @@ import useMobileDetect from "../hooks/useUserAgent";
 import {useQueue} from "../hooks/useQueue";
 // @ts-ignore
 import cover from '../public/images/coverDefault.png';
+import FormSearch from "../components/forms/formSearch";
 
 const Search = () => {
 
@@ -44,13 +45,14 @@ const Search = () => {
     return (
         <MainLayout>
             <SectionLayout>
-                {status && <p>Ничего не найдено...</p>}
+                {isMobile && <FormSearch />}
+                {status && <p className={styles.noResultTitle}>Ничего не найдено...</p>}
                 {data?.albums.length > 0 &&
                 <Section key={'Альбомы'} title={'Альбомы'} cells={data.albums} idTypeCells={1}/>}
                 {data?.playlists.length > 0 &&
                 <Section key={'Плейлисты'} title={'Плейлисты'} cells={data.playlists} idTypeCells={2}/>}
                 {data?.tracks.length > 0 &&
-                <div className={styles.container}>
+                <div className={styles.containerSearch}>
                     <div className={styles.content}>
                         {data?.tracks.map(track => <Track key={track.idTrack} track={track} isMobile={isMobile}
                                                           play={play}

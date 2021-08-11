@@ -6,7 +6,7 @@ const MobileHeader = () => {
     return (
         <>
             <div className={'headerContainer'}>
-                <div className={'title'}>Главная</div>
+                <div className={'title'}></div>
             </div>
 
             <style jsx>{`

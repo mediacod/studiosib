@@ -21,7 +21,6 @@ const Track: React.FC<Track> = ({ track, isMobile, play, isPlay }) => {
 
     let activeStyle = isPlay ? styles.active : ''
 
-
     const isOpenMenu = false;
     return (
         <div className={activeStyle}>
