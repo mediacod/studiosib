@@ -19,7 +19,7 @@ const getMobileDetect = (userAgent: NavigatorID['userAgent']) => {
 
 const useMobileDetect = () => {
     const [isMobile, setIsMobile] = useState(false);
-    useEffect(() => {}, [])
+
     const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent
 
     // const currentDevice = useMobileDetect()
@@ -28,7 +28,9 @@ const useMobileDetect = () => {
     const flag = currentDevice.isMobile()
 
     useEffect(()=>{
-        setIsMobile(flag)
+        if(flag  != isMobile){
+            setIsMobile(flag)
+        }
     },[flag])
 
     return {isMobile}

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const MoblieHeader = () => {
+const MobileHeader = () => {
     return (
         <>
             <div className={'headerContainer'}>
-                <div>Главная</div>
+                <div/>
             </div>
 
             <style jsx>{`
@@ -31,4 +31,4 @@ const MoblieHeader = () => {
     );
 };
 
-export default MoblieHeader;
+export default MobileHeader;

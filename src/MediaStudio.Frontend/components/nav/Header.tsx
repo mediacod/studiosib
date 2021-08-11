@@ -4,25 +4,10 @@ import {useRouter} from "next/router";
 import Icons from "../Icons";
 import {useActions} from "../../hooks/useActions";
 import Link from 'next/link';
+import FormSearch from "../forms/formSearch";
 
 const Header: React.FC = () => {
     const router = useRouter()
-    const pathname = router.pathname
-
-    const {getDataSearch} = useActions()
-
-    const clickSearchHandler = () => {
-        if(pathname != '/search'){
-            router.push('/search')
-        }
-    }
-
-    const searchHandler = (e) => {
-        const value = e.target.value
-        if(value.length > 0){
-            getDataSearch(value)
-        }
-    }
 
     const targetTg = () => {
         router.push('https://t.me/studiosib_music', '_blank')
@@ -45,10 +30,7 @@ const Header: React.FC = () => {
                 </div>
             </div>
             <div className={styles.search} onClick={()=>{}}>
-                <form action="#">
-                    <input type="search" placeholder="ПОИСК" onChange={searchHandler} onClick={clickSearchHandler} />
-                    <button type="submit"/>
-                </form>
+                <FormSearch />
             </div>
             <div className={styles.authorization}>
                 <div className={styles.contact}>

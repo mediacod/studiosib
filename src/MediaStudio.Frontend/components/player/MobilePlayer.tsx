@@ -6,7 +6,7 @@ export const MobilePlayer = ({name, play, playIcon}) => {
 
     return (
         <>
-            <div className={'container'}>
+            <div className={'player-container'}>
                 <Icons action={play} name={playIcon} color={'#fff'} size={'20'} className={'icon'} />
                 <div className={'name-container'}>
                     <div className={'name'}>{name}</div>
@@ -14,7 +14,7 @@ export const MobilePlayer = ({name, play, playIcon}) => {
                 </div>
             </div>
             <style>{`
-                .container {
+                .player-container {
                     position: fixed;
                     display: flex;
                     align-items: center;
@@ -38,9 +38,17 @@ export const MobilePlayer = ({name, play, playIcon}) => {
                 }
                 .name{
                     font-size: 16px;
+                    white-space: nowrap;
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .artist{
                     font-size: 12px;
+                    white-space: nowrap;
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .icon {
                     margin-top: 10px;
