@@ -37,7 +37,9 @@ const Header: React.FC = () => {
                     <Icons action={targetTg} name={'tg'} color={''} size={'30px'} className={styles.contactIcon}/>
                     <Icons action={targetYt} name={'yt'} color={''} size={'30px'} className={styles.contactIcon}/>
                 </div>
-                <span className={styles.authorizationName}>Имя пользователя</span>
+                <Link href={'/auth'}>
+                    <span className={styles.authorizationName}>Личный кабинет</span>
+                </Link>
             </div>
         </div>
     );
