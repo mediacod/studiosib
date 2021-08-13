@@ -70,7 +70,12 @@ export const useAudio = () => {
     }, [active]);
 
     useEffect(() => {
+        audio.addEventListener('ended', () => {
+            next()
+        });
+    }, [audio?.src])
 
+    useEffect(() => {
         if (!pause) play();
         else suspend()
 
