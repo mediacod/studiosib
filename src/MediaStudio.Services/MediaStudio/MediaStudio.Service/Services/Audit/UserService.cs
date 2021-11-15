@@ -17,21 +17,21 @@ namespace MediaStudio.Service.Services.Audit
             postgres = context;
             _accountService = accountService;
         }
-        public int PostUser(UserModel user)
+        public int PostUser(UserModel userModel)
         {
-            CheckValidUser(user);
-            postgres.User.Add(
-                new User { 
-                    Gender =user.Gender,
-                    DateBirthday = user.DateBirthday,
-                    FirstName =user.FirstName,
-                    IdAccount = user.IdAccount,
-                    IdCloudPath = user.IdCloudPath,
-                    IdUser = user.IdUser,
-                    LastName = user.LastName,
-                    Patronymic = user.Patronymic,
-                    PhoneNumber = user.PhoneNumber});
-
+            CheckValidUser(userModel);
+            var user = new User
+            {
+                Gender = userModel.Gender,
+                DateBirthday = userModel.DateBirthday,
+                FirstName = userModel.FirstName,
+                IdAccount = userModel.IdAccount,
+                IdCloudPath = userModel.IdCloudPath,
+                LastName = userModel.LastName,
+                Patronymic = userModel.Patronymic,
+                PhoneNumber = userModel.PhoneNumber
+            };
+            postgres.User.Add(user);
             postgres.SaveChanges();
             return user.IdUser;
         }
@@ -56,14 +56,14 @@ namespace MediaStudio.Service.Services.Audit
             return account.User;
         }
 
-        public void CheckValidUser(UserModel user)
+        public void CheckValidUser(UserModel newUser)
         {
-            if(postgres.User.Any(user => user.IdAccount == user.IdAccount))
+            if(postgres.User.Any(user => user.IdAccount == newUser.IdAccount))
             {
-                throw new MyBadRequestException($"User c IdAccount {user.IdAccount} уже существует!");
+                throw new MyBadRequestException($"User c IdAccount {newUser.IdAccount} уже существует!");
             }
 
-            CheckValidAccount(user.IdAccount);
+            CheckValidAccount(newUser.IdAccount);
         }
 
         public void CheckValidIdUser(int idUser)
