@@ -11,7 +11,7 @@ services:
     environment:
       MINIO_ROOT_USER: $MINIO_ACCESS_KEY
       MINIO_ROOT_PASSWORD: $MINIO_SECRET_KEY
-    command: server /data --console-address ":9001"
+    command: server /export --console-address ":9001"
     volumes:
       - ../../src/MediaStudio.Minio/data:/export
       - ../../src/MediaStudio.Minio/config:/root/.minio
