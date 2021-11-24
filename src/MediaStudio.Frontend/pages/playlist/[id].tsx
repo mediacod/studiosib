@@ -40,8 +40,8 @@ const PlaylistPage: React.FC = () => {
                     <div className={styles.infoBlock}>
                         <div className={styles.titleContainer}>
                             <h1 className={styles.albumName}>{albumPage.name}</h1>
-                            <p className={styles.albumArtistName}>Сибирская студия</p>
-                            <p className={styles.albumYear}>2011 год</p>
+                            <p className={styles.albumArtistName}>Студия Сибирского объединения</p>
+                            <p className={styles.albumYear}></p>
                         </div>
                         <div className={styles.buttonsContainer}></div>
                     </div>

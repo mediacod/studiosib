@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>MediaStudio.xml</DocumentationFile>
+    <DocumentationFile>MediaStudio.CMS.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -48,17 +48,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediaStudio.CMS.DBContext\MediaStudio.CMS.DBContext.csproj" />
+    <ProjectReference Include="..\..\DBContext\DBContext.csproj" />
     <ProjectReference Include="..\MediaStudio.CMS.Service\MediaStudio.CMS.Service.csproj" />
-    <ProjectReference Include="..\MediaStudioService\MediaStudioService.csproj" />
-    <ProjectReference Include="..\PostgresDBContext\DBContext.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="cert.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="MediaStudio.xml">
+    <None Update="MediaStudioCMS.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

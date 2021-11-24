@@ -28,6 +28,10 @@
     font-weight: 400;
     line-height: 16px;
     color: #4B4B4B;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &Artist{
@@ -152,11 +156,16 @@
 .progress{
 
   &Bar{
-    position: relative;
+    position: absolute;
     display: block;
-    height: 3px;
+    height: 5px;
     width: 100%;
     background-color: #D7D7D7;
+
+    &:hover{
+      height: 6px;
+      transition: .2s;
+    }
   }
 
   &Main{

@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediaStudio.DBContext\MediaStudio.DBContext.csproj" />
+    <ProjectReference Include="..\..\DBContext\DBContext.csproj" />
   </ItemGroup>
 
   <ItemGroup>

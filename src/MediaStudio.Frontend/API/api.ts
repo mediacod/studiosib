@@ -1,7 +1,7 @@
 import Axios, {AxiosInstance} from "axios";
 
 let instance: AxiosInstance  = Axios.create({
-    baseURL: "http://msapi.ru:8081/"
+    baseURL: "http://studiosib.ru:8081/"
 });
 
 export const sectionAPI = {
@@ -22,5 +22,11 @@ export const albumAPI = {
 export const playlistAPI = {
     get(id) {
         return instance.get(`playlist/` + id)
+    }
+};
+
+export const searchAPI = {
+    get(data) {
+        return instance.get(`page/search?filter=${data}`)
     }
 };

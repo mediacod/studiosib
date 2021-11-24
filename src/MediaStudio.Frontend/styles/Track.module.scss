@@ -11,6 +11,10 @@
   padding: 13px 20px 13px 24px;
   cursor: pointer;
 
+  .active & {
+    background-color: #f2f2f2
+  }
+
   @media (max-width: 1600px) {
     padding: 9px 20px 13px 17px;
     grid-template-columns: 33px 1fr 25px 65px 50px;
@@ -26,7 +30,9 @@
   }
 
   &.active {
-    background-color: #f2f2f2;
+    @media (min-width: 500px) {
+      background-color: #f2f2f2;
+    }
   }
 }
 
@@ -45,8 +51,15 @@
   color: #4b4b4b;
   margin: 0;
   padding-right: 10px;
+  padding-bottom: 3px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 95%;
+  overflow: hidden;
+
+  @media (max-width: 500px) {
+    max-width: 75vw;
+  }
 }
 
 .duration {

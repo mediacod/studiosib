@@ -38,7 +38,7 @@ namespace MediaStudio
                 });
 
                 var xmlMStudio = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlMStudioService = "MediaStudioService.xml";
+                var xmlMStudioService = "MediaStudioServiceCMS.xml";
                 var xmlDbContext = "DBContext.xml";
 
                 var xmlPathMStudio = Path.Combine(AppContext.BaseDirectory, xmlMStudio);

@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediaStudio.DBContext\MediaStudio.DBContext.csproj" />
+    <ProjectReference Include="..\..\DBContext\DBContext.csproj" />
     <ProjectReference Include="..\MediaStudio.Service\MediaStudio.Service.csproj" />
   </ItemGroup>
 

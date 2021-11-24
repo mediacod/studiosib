@@ -19,10 +19,11 @@ const Track: React.FC<Track> = ({ track, isMobile, play, isPlay }) => {
         setColorButton(isPlay ? '#0064ac' : '#B1AFAF')
     }, [isPlay])
 
+    let activeStyle = isPlay ? styles.active : ''
 
     const isOpenMenu = false;
     return (
-        <div>
+        <div className={activeStyle}>
             <div className={styles.container} onClick={() => play(track.idTrack)} >
                 {!isMobile && <div className={styles.play}>
                     <Icons name={'playItem'} size={'20px'} color={colorButton} />

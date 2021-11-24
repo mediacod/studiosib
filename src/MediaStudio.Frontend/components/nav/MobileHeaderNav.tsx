@@ -6,7 +6,7 @@ const MobileHeader = () => {
     return (
         <>
             <div className={'headerContainer'}>
-                <div>Главная</div>
+                <div className={'title'}></div>
             </div>
 
             <style jsx>{`
@@ -26,6 +26,14 @@ const MobileHeader = () => {
                 
                 background: linear-gradient(90deg, #456380 0%, #AED5FA 100%);
                 box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                
+                z-index: 1000;
+              }
+              
+              .title {
+                color: #fff;
+                font-weight: normal;
+                font-size: 24px;
               }
               
             `}</style>

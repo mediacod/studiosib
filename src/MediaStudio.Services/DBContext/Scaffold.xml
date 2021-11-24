@@ -1,0 +1,3 @@
+﻿<!--
+Scaffold-DbContext -ContextDir Connect -OutputDir Models "Server=185.248.102.115; Port=5432; Database=mediastudio; User Id=postgres; Password=ft5tf&XuwRe4Db;CommandTimeout=300;Pooling=false;" Npgsql.EntityFrameworkCore.PostgreSQL -Force
+-->

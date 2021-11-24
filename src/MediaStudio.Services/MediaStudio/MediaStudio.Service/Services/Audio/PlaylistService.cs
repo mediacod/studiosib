@@ -241,7 +241,7 @@ namespace MediaStudioService.Services
                 throw new MyNotFoundException($"Ошибка! В базе данных не найден TrackToPlaylist с id {id}!");
         }
 
-        private void CheckPlaylistExists(long idPlaylist)
+        public void CheckPlaylistExists(long idPlaylist)
         {
             if (!postgres.Playlist.Any(e => e.IdPlaylist == idPlaylist))
                 throw new MyNotFoundException($"Ошибка! В базе данных не найден плейлист с id {idPlaylist}!");

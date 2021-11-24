@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useActions} from "./useActions";
 import {useTypedSelector} from "./useTypedSelector";
 import {is} from "@babel/types";
+import {setNewTime} from "../store/action-creators/player";
 
 let audio: any;
 
@@ -19,7 +20,9 @@ export const useAudio = () => {
         repeatOne,
         isShuffle,
         isNext,
-        isPrev
+        isPrev,
+        linkCover,
+        newTime
     } = useTypedSelector((state) => state.player);
     const {
         pauseTrack,
@@ -31,10 +34,10 @@ export const useAudio = () => {
         setQueue,
         setIsNextFalse,
         setIsPrevFalse,
+        setNewTime
     } = useActions();
 
     const [currentActive, setCurrentActive] = useState({idTrack: null})
-    const [restoreQueue, setRestoreQueue] = useState([])
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
@@ -67,7 +70,12 @@ export const useAudio = () => {
     }, [active]);
 
     useEffect(() => {
+        audio.addEventListener('ended', () => {
+            next()
+        });
+    }, [audio?.src])
 
+    useEffect(() => {
         if (!pause) play();
         else suspend()
 
@@ -87,9 +95,10 @@ export const useAudio = () => {
         }
     }, [isPrev]);
 
-    useEffect(()=>{
-        shuffle()
-    }, [isShuffle])
+    useEffect(() => {
+
+        if(newTime != 0) changeTime(newTime)
+    }, [newTime])
 
     const suspend = () => {
         audio.pause();
@@ -122,26 +131,10 @@ export const useAudio = () => {
         playTrack();
     };
 
-    const shuffle = () => {
-
-        if (isShuffle) {
-            setRestoreQueue(queue)
-            const shuffleQueue = queue.sort(() => Math.random() - 0.5);
-            let currentId = queue?.findIndex(t => t.idTrack === active?.idTrack)
-
-            let currentTracks = shuffleQueue.splice(0, currentId);
-            console.log(isShuffle, currentTracks)
-            const newQueue = [...shuffleQueue, ...currentTracks]
-            setQueue({ queue: newQueue, idAlbum, idType })
-
-        }else {
-            console.log(isShuffle, restoreQueue)
-            let currentId = queue.findIndex(t => t.idTrack === active?.idTrack)
-            setQueue({ queue: restoreQueue, idAlbum, idType })
-            setIndex(currentId)
-            setRestoreQueue([])
-        }
+    const changeTime = (data) => {
+        audio.currentTime = data * duration / 100;
     }
+
 
     return;
 };

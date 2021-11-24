@@ -5,10 +5,8 @@ import styles from "../styles/MainLayout.module.scss";
 import Sidebar from "../components/nav/Sidebar";
 import Header from "../components/nav/Header";
 import Player from '../components/player/Player';
-import usePage from '../hooks/useUserAgent';
 import useMobileDetect from '../hooks/useUserAgent';
 import NavMobile from '../components/nav/navMobile';
-import MoblieHeader from '../components/nav/MoblieHeader';
 
 
 const MainLayout = ({children}) => {
@@ -21,6 +19,7 @@ const MainLayout = ({children}) => {
                 <div className={styles.content}>
                     {children}
                 </div>
+                <Player/>
                 <NavMobile />
             </div>
         )
@@ -33,7 +32,7 @@ const MainLayout = ({children}) => {
             <div className={styles.content}>
                 {children}
             </div>
-            {!isMobile && <Player/>}
+            <Player/>
         </div>
     );
 };

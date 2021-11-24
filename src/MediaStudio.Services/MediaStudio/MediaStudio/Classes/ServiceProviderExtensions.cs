@@ -1,6 +1,9 @@
 ﻿namespace MediaStudio.Core
 {
     using DBContext.Connect;
+    using MediaStudio.Service.Services.Audit;
+    using MediaStudio.Service.Services.UserFavourites;
+    using MediaStudio.Service.Services.UserHistory;
     using MediaStudioService;
     using MediaStudioService.AccountServic;
     using MediaStudioService.Builder.PageModelBuilder;
@@ -40,6 +43,20 @@
             services.AddAuthorization(options => PolicyManager.BuldAuthOption(Policy.FullPage, options));
         }
 
+        public static void AddUserFavourites(this IServiceCollection services)
+        {
+            services.AddTransient<UserFavouritesAlbumService>();
+            services.AddTransient<UserFavouritesTrackService>();
+            services.AddTransient<UserFavouritesPlaylistService>();
+        }
+
+        public static void AddUserHistory(this IServiceCollection services)
+        {
+            services.AddTransient<UserHistoryAlbumService>();
+            services.AddTransient<UserHistoryTrackService>();
+            services.AddTransient<UserHistoryPlaylistService>();
+        }
+
         public static void AddAudit(this IServiceCollection services)
         {
             services.AddTransient<AuditAccountService>();
@@ -54,6 +71,7 @@
         {
             services.AddTransient<AuthService>();
             services.AddTransient<AccountService>();
+            services.AddTransient<UserService>();
 
             services.AddAuthentication(x =>
             {
@@ -82,7 +100,6 @@
             services.AddTransient<AlbumBuilderService>();
             services.AddTransient<PlaylistBuilderService>();
             services.AddTransient<TrackBuilderService>();
-
         }
 
         public static void AddInterfaceService(this IServiceCollection services)

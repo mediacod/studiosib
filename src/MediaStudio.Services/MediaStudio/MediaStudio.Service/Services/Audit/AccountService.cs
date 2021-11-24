@@ -68,6 +68,18 @@ namespace MediaStudioService.AccountServic
             return $"Пользователь {login} успешно создан!";
         }
 
+        public int CreateAccount(InputAccount inputAccount)
+        {
+            CheckValidTypeAccount(inputAccount.IdTypeAccount);
+            if (LoginExists(inputAccount.Login))
+                throw new MyBadRequestException($"Пользователь с логином {inputAccount.Login} уже существует!");
+
+            var newAccount = AccountBuilderSerivice.Create(inputAccount);
+            postgres.Account.Add(newAccount);
+            postgres.SaveChanges();
+            return newAccount.IdAccount;
+        }
+
         public object GetTokenStatus(string token)
         {
             var handler = new JwtSecurityTokenHandler();
@@ -81,8 +93,51 @@ namespace MediaStudioService.AccountServic
         {
             CheckValidTypeAccount(idTypeAccount.GetValueOrDefault());
             return await GetAllAsync()
-                    .Where(w => w.IdTypeAccount == idTypeAccount)
+                    .Where(pageAccount => pageAccount.IdTypeAccount == idTypeAccount)
                     .ToListAsync();
+        }
+
+        public Account GetAccountByLogin(string login)
+        {
+            if (!postgres.Account.Any(account => account.Login == login))
+            {
+                throw new MyNotFoundException($"Аккаунт c логином {login} отсуствует в БД!");
+            }
+
+            return postgres.Account
+                .AsNoTracking()
+                .Where(account => account.Login == login)
+                .Include(account => account.User)
+                .FirstOrDefault();
+        }
+
+        public int GetIdAccountByLogin(string login)
+        {
+            if (!postgres.Account.Any(account => account.Login == login))
+            {
+                throw new MyNotFoundException($"Аккаунт c логином {login} отсуствует в БД!");
+            }
+
+            return postgres.Account
+                .AsNoTracking()
+                .Where(account => account.Login == login)
+                .Select(a => a.IdAccount)
+                .FirstOrDefault();
+        }
+
+        public int GetIdUserByLogin(string login)
+        {
+            if (!postgres.Account.Any(account => account.Login == login))
+            {
+                throw new MyNotFoundException($"Аккаунт c логином {login} отсуствует в БД!");
+            }
+
+            return postgres.Account
+                .AsNoTracking()
+                .Include(account => account.User)
+                .Where(account => account.Login == login)
+                .Select(a => a.User.IdUser)
+                .FirstOrDefault();
         }
 
         public string DeleteAccount(string login, string executorLogin)

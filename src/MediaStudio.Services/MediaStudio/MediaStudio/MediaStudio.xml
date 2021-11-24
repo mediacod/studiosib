@@ -4,21 +4,6 @@
         <name>MediaStudio</name>
     </assembly>
     <members>
-        <member name="M:MediaStudio.Controllers.AdminAlbumController.GetAlbum(System.Int32,System.Boolean)">
-            <summary>
-            Возвращает альбом по идентификатору.
-            </summary>
-            <param name="id">Идентификатор альбома.</param>
-            <param name="isHighQuality">Признак высокого качества.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
-        </member>
-        <member name="M:MediaStudio.Controllers.AdminAlbumController.Delete(System.Int32)">
-            <summary>
-            Удаляет альбом по идентификатору.
-            </summary>
-            <param name="idAlbum">Идентификатор альбома.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
-        </member>
         <member name="M:MediaStudio.Controllers.AlbumController.GetAlbum(System.Int32,System.Boolean)">
             <summary>
             Получить альбом.
@@ -33,6 +18,111 @@
             </summary>
             <param name="idTrack">Идентификатор трека.</param>
             <returns>Найденный альбом.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.AlbumController.ByTypeAudio(System.Int32)">
+            <summary>
+            Получить коллекцию альбомов по типу аудио.
+            </summary>
+            <param name="idTypeAudio">Идентификатор типа аудио.</param>
+            <returns>Найденные альбомы.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserController.Get">
+            <summary>
+            Получает пользователя по текущему JWT.
+            </summary>
+            <returns>Пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserController.Put(MediaStudio.Service.Models.Input.UpdateUserModel)">
+            <summary>
+            Обновляет пользователя.
+            </summary>
+            <param name="user">Обновленный пользователь.</param>
+            <returns>Обновленный пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserController.Post(MediaStudio.Service.Models.Input.UserModel)">
+            <summary>
+            Создает нового пользователя.
+            </summary>
+            <param name="user">Новый пользователь.</param>
+            <returns>Идентификатор пользователя.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesAlbumController.Get">
+            <summary>
+            Получает список избранных альбомов для текущего пользователя.
+            </summary>
+            <returns>Список избранных альбомов текущего пользователя.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesAlbumController.Post(System.Int32)">
+            <summary>
+            Добвляет в избранное пользователя альбом.
+            </summary>
+            <param name="idAlbum">Идентификатор альбома для добавления в избранное пользователя.</param>
+            <returns>Идентификатор избранного альбома пользователем.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesPlaylistController.Get">
+            <summary>
+            Получает список избранных плейлистов для текущего пользователя.
+            </summary>
+            <returns>Список избранных плейлистов текущего пользователя.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesPlaylistController.Post(System.Int64)">
+            <summary>
+            Добавляет в избранное пользователя плейлист.
+            </summary>
+            <param name="idPlaylist">Идентификатор плейлиста для добавления в избранное пользователя.</param>
+            <returns>Идентификатор избранного плейлиста пользователя .</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesTrackController.Get">
+            <summary>
+            Получает список избранных треков для текущего пользователя.
+            </summary>
+            <returns>Список избранных треков текущего пользователя.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserFavouritesTrackController.Post(System.Int32)">
+            <summary>
+            Добавляет в избранное пользователя трек.
+            </summary>
+            <param name="idTrack">Идентификатор трека для добавления в избранное пользователя.</param>
+            <returns>Идентификатор избраного трека пользователя.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryAlbumController.Get">
+            <summary>
+            Получает список альбомов, которые прослушал пользователь.
+            </summary>
+            <returns>Список альбомов, которые прослушал пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryAlbumController.Post(System.Int32)">
+            <summary>
+            Добавляет в историю прослушивания пользователем альбом.
+            </summary>
+            <param name="idAlbum">Идентификатор альбома для добавления в историю прослушивания.</param>
+            <returns>Идентификатор истории пользователя альбома.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryPlaylistController.Get">
+            <summary>
+            Получает список плейлистов, которые прослушал пользователь.
+            </summary>
+            <returns>Список плейлистов, которые прослушал пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryPlaylistController.Post(System.Int64)">
+            <summary>
+            Добавляет в историю прослушивания пользователем плейлист.
+            </summary>
+            <param name="idPlaylist">Идентификатор плейлиста для добавления в историю прослушивания.</param>
+            <returns>Идентификатор истории пользователя плейлиста.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryTrackController.Get">
+            <summary>
+            Получает список треков, которые прослушал пользователь.
+            </summary>
+            <returns>Список треков, которые прослушал пользователь.</returns>
+        </member>
+        <member name="M:MediaStudio.Controllers.UserHistoryTrackController.Post(System.Int32)">
+            <summary>
+            Добавляет в историю прослушивания пользователем трек.
+            </summary>
+            <param name="idTrack">Идентификатор трека для добавления в историю прослушивания.</param>
+            <returns>Идентификатор истории пользователя трека.</returns>
         </member>
     </members>
 </doc>
