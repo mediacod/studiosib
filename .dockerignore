@@ -13,10 +13,11 @@
 **/*Dockerfile*
 **/*docker-compose*
 **/.env
-**/.mp3
-**/.jpeg
+**/*mp3*
+**/*jpeg*
 Build/*.yaml
 bin
 obj
+MediaStudio.Minio
 LICENSE
 READMI**/.md
