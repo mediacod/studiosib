@@ -12,9 +12,9 @@
 *.jpg
 *.mp3
 *.bak
-*.yml.bak
 
-MediaStudio.Postgres/
+PgAdmin/
+pgdata/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
