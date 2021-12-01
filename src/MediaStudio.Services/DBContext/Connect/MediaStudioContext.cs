@@ -63,7 +63,7 @@ namespace DBContext.Connect
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("Server=185.248.102.115; Port=5432; Database=mediastudio; User Id=postgres; Password=ft5tf&XuwRe4Db;CommandTimeout=300;Pooling=false;");
+                optionsBuilder.UseNpgsql("Server=185.248.102.115; Port=8084; Database=mediastudio; User Id=postgres; Password=ft5tf&XuwRe4Db;CommandTimeout=300;Pooling=false;");
             }
         }
 
