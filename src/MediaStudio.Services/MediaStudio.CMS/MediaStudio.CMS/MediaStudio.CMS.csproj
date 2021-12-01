@@ -56,6 +56,9 @@
     <None Update="cert.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="MediaStudio.CMS.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="MediaStudioCMS.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
