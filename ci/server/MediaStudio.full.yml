@@ -40,7 +40,7 @@ services:
     volumes:
       - ../../src/MediaStudio.Postgres/PgAdmin:/var/lib/pgadmin
     ports:
-      - "8083:5050"
+      - "8085:5050"
     depends_on:
       - ms-postgres
     restart: unless-stopped
