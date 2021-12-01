@@ -16,7 +16,7 @@ services:
       - ../../src/MediaStudio.Minio/data:/export
       - ../../src/MediaStudio.Minio/config:/root/.minio  
       
-  postgres:
+  ms-postgres:
     container_name: ms-postgres
     image: postgres:13.3
     environment:
