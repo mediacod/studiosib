@@ -37,7 +37,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
       PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
     volumes:
-      - pgadmin:/var/lib/pgadmin4/storage
+      - /var/lib/pgadmin/storage
     ports:
       - "8085:5050"
     depends_on:
