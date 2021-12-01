@@ -11,6 +11,10 @@
 *.sln.docstates
 *.jpg
 *.mp3
+*.bak
+*.yml.bak
+
+MediaStudio.Postgres/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
