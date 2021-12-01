@@ -2,6 +2,8 @@
 **/.dockerignore
 **/.env
 **/.git
+**/.mp3
+**/.jpeg
 **/.gitignore
 **/.project
 **/.settings
@@ -21,5 +23,8 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+MediaStudio.Minio/data
+MediaStudio.Minio/data/*
+
 LICENSE
 README.md
