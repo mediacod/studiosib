@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../public/images/StudioSib.svg'
+import logo from '../public/static/images/StudioSib.svg'
 
 const Logo: React.FC = () => {
     return (

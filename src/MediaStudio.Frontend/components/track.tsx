@@ -3,6 +3,9 @@ import { ITrack } from "../types/track";
 import styles from "../styles/Track.module.scss"
 import Icons from "./Icons";
 import { convertHMS } from '../utils/convertHMS';
+import PlayItem from "./icons/PlayItem";
+import Like from "./icons/Like";
+import PopupMenu from "./icons/PopupMenu";
 
 interface Track {
     track: ITrack;
@@ -26,13 +29,13 @@ const Track: React.FC<Track> = ({ track, isMobile, play, isPlay }) => {
         <div className={activeStyle}>
             <div className={styles.container} onClick={() => play(track.idTrack)} >
                 {!isMobile && <div className={styles.play}>
-                    <Icons name={'playItem'} size={'20px'} color={colorButton} />
+                    <PlayItem size={'20px'} color={colorButton} />
                 </div>}
                 <p className={styles.name}>{track.name}</p>
-                <Icons className={styles.like} name={'like'} color={'#B1AFAF'} size={'20px'} />
+                <Like className={styles.like} color={'#B1AFAF'} size={'20px'} />
                 {!isMobile && <span className={styles.duration}>{track.duration ? convertHMS(track.duration) : null}</span>}
                 <div className={styles.popupMenu}>
-                    <Icons name={'popupMenu'} color={'#B1AFAF'} size={isMobile ? '13px' : '20px'} />
+                    <PopupMenu color={'#B1AFAF'} size={isMobile ? '13px' : '20px'} />
                 </div>
 
 

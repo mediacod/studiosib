@@ -1,15 +1,24 @@
 import React, {useState} from 'react';
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import styles from "../../styles/Player.module.scss";
-import Icons from "../Icons";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
 import { convertHMS } from "../../utils/convertHMS";
-// @ts-ignore
-import cover from '../../public/images/coverDefault.png';
+import cover from '../../public/static/images/coverDefault.png';
 import {setNewTime} from "../../store/action-creators/player";
 import useMobileDetect from "../../hooks/useUserAgent";
 import {MobilePlayer} from "./MobilePlayer";
+import Prev from "../icons/Prev";
+import Next from "../icons/Next";
+import Change from "../icons/Change";
+import Like from "../icons/Like";
+import Repeat from "../icons/Repeat";
+import Download from "../icons/Download";
+import Mute from "../icons/Mute";
+import Queue from "../icons/Queue";
+import Play from "../icons/Play";
+import Pause from "../icons/Pause";
 
 
 const Player: React.FC = () => {
@@ -22,7 +31,7 @@ const Player: React.FC = () => {
     const router = useRouter()
     const {isMobile} = useMobileDetect();
 
-    let playIcon = pause ? 'play' : 'pause'
+    let playIcon = pause ? <Play color={'#4B4B4B'} size={'18px'} className={styles.controlPlayIcon} /> : <Pause color={'#4B4B4B'} size={'18px'} className={styles.controlPlayIcon} />
     let trackProgress = currentTime && duration ? 100 / duration * currentTime : 0
 
     const play = () => {
@@ -101,7 +110,12 @@ const Player: React.FC = () => {
                 <div className={styles.main}>
                     <div className={styles.info}>
                         <div className={styles.infoImage}>
-                            <img src={linkCover || cover} width={48} height={48} loading={"lazy"} />
+                            <Image id="require-static"
+                                   src={linkCover || cover}
+                                   width={48}
+                                   height={48}
+                                   loading={"lazy"}
+                            />
                         </div>
                         <div className={styles.infoNameContainer}>
                             <span className={styles.infoName}>{active ? active.name : ''}</span>
@@ -109,19 +123,20 @@ const Player: React.FC = () => {
                         </div>
                     </div>
                     <div className={styles.actions}>
-                        <Icons action={shuffleHandler} name={'change'} color={isShuffle ? '#6BE8F0' : '#4B4B4B'} size={'12px'} />
-                        <Icons name={'repeat'} color={'#4B4B4B'} size={'11px'} />
-                        <Icons name={'like'} color={'#4B4B4B'} size={'12px'} />
-                        <Icons action={downloadHandler} name={'download'} color={'#4B4B4B'} size={'12px'} />
+                        <Change action={shuffleHandler} color={isShuffle ? '#6BE8F0' : '#4B4B4B'} size={'12px'} />
+                        <Repeat color={'#4B4B4B'} size={'11px'} />
+                        <Like color={'#4B4B4B'} size={'12px'} />
+                        <Download action={downloadHandler} color={'#4B4B4B'} size={'12px'} />
                     </div>
                     <div className={styles.control}>
-                        <Icons action={setIsPrev} name={'prev'} color={'#4B4B4B'} size={'14px'} height={'11px'} className={styles.controlPrev} />
+                        <Prev action={setIsPrev} color={'#4B4B4B'} size={'14px'} height={'11px'}
+                              className={styles.controlPrev} />
                         <div className={styles.controlPlay} onClick={play}>
                             <div className={styles.controlCircleBig} />
                             <div className={styles.controlCircle} />
-                            <Icons name={playIcon} color={'#4B4B4B'} size={'18px'} className={styles.controlPlayIcon} />
+                            {playIcon}
                         </div>
-                        <Icons action={setIsNext} name={'next'} color={'#4B4B4B'} size={'14px'} height={'11px'} className={styles.controlNext} />
+                        <Next action={setIsNext} color={'#4B4B4B'} size={'14px'} height={'11px'} className={styles.controlNext} />
                     </div>
                     <div className={styles.progress}>
 
@@ -132,10 +147,10 @@ const Player: React.FC = () => {
                             <span className={styles.extraDuration}> {convertHMS(duration)}</span>
                         </div>
                         <div className={styles.queue}>
-                            <Icons action={queueHandler} name={'queue'} color={'#4B4B4B'} size={'15px'} />
+                            <Queue action={queueHandler} color={'#4B4B4B'} size={'15px'} />
                         </div>
                         <div className={styles.volume}>
-                            <Icons name={'mute'} color={'#4B4B4B'} size={'15px'} />
+                            <Mute color={'#4B4B4B'} size={'15px'} />
                         </div>
                     </div>
                 </div>

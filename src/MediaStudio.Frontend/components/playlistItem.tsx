@@ -1,8 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image'
 import React, {useRef} from 'react';
 import styles from '../styles/PlaylistItem.module.scss'
-// @ts-ignore
-import cover from '../public/images/coverDefault.png';
+import cover from '../public/static/images/coverDefault.png';
 import { IAlbumItem } from '../types/album';
 
 
@@ -22,7 +22,12 @@ const PlaylistItem: React.FC<IPlaylist> = ({album, albumWidth}) => {
             <a>
                 <div className={styles.playlistContainer}>
                     <div className={styles.playlistCoverContainer} style={styleAlbumCover}>
-                        <img className={styles.playlistCover} src={album.linkCover || cover} alt={album.name} loading={"lazy"}/>
+                        <Image id="require-static"
+                               className={styles.playlistCover}
+                               src={album.linkCover || cover}
+                               alt={album.name}
+                               loading={"lazy"}
+                        />
                     </div>
                     <div className={styles.playlistTitleContainer} style={styleTitleContainer}>
                         <div className={styles.playlistTitle}>{album.name}</div>

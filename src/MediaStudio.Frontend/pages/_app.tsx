@@ -11,24 +11,21 @@ const WrapperAudio = () => {
 }
 
 class WrappedApp extends App<AppInitialProps> {
-    public static getInitialProps = async ({Component, ctx}: AppContext) => {
-
+    public static getInitialProps = wrapper.getInitialAppProps(store => async context => {
         // 1. Wait for all page actions to dispatch
         const pageProps = {
-            ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+            ...(await App.getInitialProps(context)).pageProps,
         };
 
         // 2. Stop the saga if on server
-        if (ctx.req) {
-            ctx.store.dispatch(END);
-            await (ctx.store as SagaStore).sagaTask.toPromise();
+        if (context.ctx.req) {
+            store.dispatch(END);
+            await (store as SagaStore).sagaTask.toPromise();
         }
 
         // 3. Return props
-        return {
-            pageProps,
-        };
-    };
+        return {pageProps};
+    });
 
     public render() {
         const {Component, pageProps} = this.props;
