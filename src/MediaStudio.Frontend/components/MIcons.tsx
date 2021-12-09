@@ -1,5 +1,4 @@
 import React from 'react';
-import IconsSVG from '../public/mobileSprite.svg';
 
 interface Icons{
     name: string;
@@ -12,10 +11,7 @@ interface Icons{
 
 const MIcons: React.FC<Icons> = ({name, color, size, className, height, width}): any => {
 
-    return(
-        <svg className={`icon icon-${name} ${className}`} fill={color} stroke={'none'} width={width || size} height={height || size}>
-            <use xlinkHref={`${IconsSVG}#${name}`} />
-        </svg>
+    return(<></>
     )
 }
 

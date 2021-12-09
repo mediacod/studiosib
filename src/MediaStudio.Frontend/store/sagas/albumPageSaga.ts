@@ -1,11 +1,8 @@
-import { getPage } from './../action-creators/page';
 import {put, takeEvery} from 'redux-saga/effects'
 import {albumAPI, playlistAPI} from "../../API/api";
 import { AlbumPageActionTypes, GetAlbumPageAction } from '../../types/albumPage';
-import {setPage} from "../action-creators/page";
 import { setAlbumPage } from '../action-creators/albumPage';
-// @ts-ignore
-import cover from '../../public/images/coverDefault.png';
+import cover from '../../public/static/images/coverDefault.png';
 
 
 export function* AlbumPageSagaWatcher() {

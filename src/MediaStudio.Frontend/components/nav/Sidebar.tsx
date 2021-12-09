@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../styles/Sidebar.module.scss';
 import Logo from "../Logo";
-import logo from "../../public/images/StudioSib.svg";
+import logo from "../../public/static/images/StudioSib.svg";
 import Nav from "./Nav";
 
 const Sidebar: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import Icons from "../Icons";
+import Play from "../icons/Play";
 
 
 export const MobilePlayer = ({name, play, playIcon}) => {
@@ -7,7 +7,7 @@ export const MobilePlayer = ({name, play, playIcon}) => {
     return (
         <>
             <div className={'player-container'}>
-                <Icons action={play} name={playIcon} color={'#fff'} size={'20'} className={'icon'} />
+                <Play action={play} color={'#fff'} size={'20'} className={'icon'} />
                 <div className={'name-container'}>
                     <div className={'name'}>{name}</div>
                     <div className={'artist'}>Студия Сибирского объединения</div>

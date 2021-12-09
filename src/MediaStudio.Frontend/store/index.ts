@@ -10,7 +10,7 @@ export interface SagaStore extends Store {
     sagaTask?: Task;
 }
 
-const makeStore = (context: Context) => {
+export const makeStore = (context: Context) => {
     // 1: Create the middleware
     const sagaMiddleware = createSagaMiddleware();
 
@@ -24,6 +24,4 @@ const makeStore = (context: Context) => {
     return store;
 };
 
-// export an assembled wrapper
 export const wrapper = createWrapper<Store<RootState>>(makeStore, {debug: true});
-// export const wrapper = createWrapper<RootState>(makeStore, {debug: true});

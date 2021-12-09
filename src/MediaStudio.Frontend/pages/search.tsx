@@ -8,8 +8,7 @@ import styles from "../styles/Search.module.scss";
 import Track from "../components/track";
 import useMobileDetect from "../hooks/useUserAgent";
 import {useQueue} from "../hooks/useQueue";
-// @ts-ignore
-import cover from '../public/images/coverDefault.png';
+import cover from '../public/static/images/coverDefault.png';
 import FormSearch from "../components/forms/formSearch";
 
 const Search = () => {
