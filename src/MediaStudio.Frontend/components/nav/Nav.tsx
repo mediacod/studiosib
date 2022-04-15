@@ -3,23 +3,30 @@ import Link from 'next/link'
 import styles from '../../styles/Nav.module.scss'
 import Icons from "../Icons";
 import {useRouter} from "next/router";
+import Home from "../icons/Home";
+import Books from "../icons/Books";
+import Congress from "../icons/Congress";
+import Music from "../icons/Music";
+import Preach from "../icons/Preach";
+import History from "../icons/History";
+import Favorite from "../icons/Favorite";
 
 const navList = [
-    {title: 'Главная', name: 'home', size: '23px', link: '/'},
-    {title: 'Музыка', name: 'music', size: '23px', link: '/music'},
-    {title: 'Проповеди', name: 'preach', size: '23px', link: '/preach'},
-    {title: 'Аудиокниги', name: 'books', size: '23px', link: '/books'},
-    {title: 'Конференции', name: 'congress', size: '23px', link: '/congress'}
+    {title: 'Главная', el: <Home size={'23px'} color={'#fff'}/>, size: '23px', link: '/'},
+    {title: 'Музыка', el: <Music size={'23px'} color={'#fff'}/>, size: '23px', link: '/music'},
+    {title: 'Проповеди', el: <Preach size={'23px'} color={'#fff'}/>, size: '23px', link: '/preach'},
+    {title: 'Аудиокниги', el: <Books size={'23px'} color={'#fff'}/>, size: '23px', link: '/books'},
+    {title: 'Конференции', el: <Congress size={'23px'} color={'#fff'}/>, size: '23px', link: '/congress'}
 ]
 
 const favoriteNavList = [
-    {title: 'История', name: 'history', size: '23px', link: '/history'},
-    {title: 'Избранное', name: 'favorite', size: '23px', link: '/favorite'},
+    {title: 'История', el: <History size={'23px'} color={'#fff'}/>, size: '23px', link: '/history'},
+    {title: 'Избранное', el: <Favorite size={'23px'} color={'#fff'}/>, size: '23px', link: '/favorite'},
 ]
 
 interface linkInterface {
     title: string;
-    name: string;
+    el: any;
     size: string;
     link: string;
 }
@@ -41,7 +48,7 @@ const RenderNav:React.FC<linksInterface> = ({items, isIcons = true}): any => {
                 <div key={item.link} className={styles.item}>
                     <Link href={item.link}>
                         <a className={styleItem}>
-                            {isIcons && <Icons name={item.name} size={item.size} color={'#fff'}/>}
+                            {item.el}
                             <span className={styles.title}>{item.title}</span>
                         </a>
                     </Link>
