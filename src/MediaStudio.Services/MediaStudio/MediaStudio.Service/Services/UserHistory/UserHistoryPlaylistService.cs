@@ -34,10 +34,12 @@ namespace MediaStudio.Service.Services.UserHistory
 
         public async Task<PagePlaylist> GetUserHistoryPlaylists(string login)
         {
-            var idAccount = _accountService.GetIdAccountByLogin(login);
+            var idUser = _accountService.GetIdUserByLogin(login);
             return await _postgres.UserHistoryPlaylist.AsNoTracking()
+                .Where(history => history.IdUser == idUser)
                 .OrderByDescending(trHistory => trHistory.LastUse)
-                .Take(20)
+                .Distinct()
+                .Take(50)
                 .Select(playlist => new PagePlaylist
                 {
                     IdPlaylist = playlist.IdPlaylist,

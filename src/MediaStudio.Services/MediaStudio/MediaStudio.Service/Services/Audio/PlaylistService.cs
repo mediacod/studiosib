@@ -1,12 +1,14 @@
 ﻿using DBContext.Connect;
 using DBContext.Models;
 using MediaStudio.Classes.MyException;
+using MediaStudioService.AccountServic;
 using MediaStudioService.Builder.PageModelBuilder;
 using MediaStudioService.Core.Enums;
 using MediaStudioService.Models.Input;
 using MediaStudioService.Models.PageModels;
 using MediaStudioService.Service.ResourceService;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,12 +20,14 @@ namespace MediaStudioService.Services
         private readonly MediaStudioContext postgres;
         private readonly PlaylistMinioService minioService;
         private readonly PlaylistBuilderService playlistBuilder;
+        private readonly AccountService accountService;
 
-        public PlaylistService(MediaStudioContext _postgres, PlaylistMinioService _minioService, PlaylistBuilderService _playlistBuilder)
+        public PlaylistService(MediaStudioContext _postgres, PlaylistMinioService _minioService, PlaylistBuilderService _playlistBuilder, AccountService _accountService)
         {
-            postgres = _postgres;
-            minioService = _minioService;
-            playlistBuilder = _playlistBuilder;
+            postgres = _postgres ?? throw new ArgumentNullException(nameof(MediaStudioContext));
+            minioService = _minioService ?? throw new ArgumentNullException(nameof(PlaylistMinioService));
+            playlistBuilder = _playlistBuilder ?? throw new ArgumentNullException(nameof(PlaylistBuilderService));
+            accountService = _accountService ?? throw new ArgumentNullException(nameof(AccountService));
         }
 
         public async Task<string> DeleteTrackAsync(long idTrackToPlaylist)
@@ -32,6 +36,19 @@ namespace MediaStudioService.Services
 
             var trackToPlaylist = postgres.TrackToPlaylist.FindAsync(idTrackToPlaylist);
             postgres.Remove(await trackToPlaylist);
+            postgres.SaveChanges();
+
+            return $"Трек из плейлиста успешно удален!";
+        }
+
+        public async Task<string> DeleteUserTrackAsync(long idTrackToPlaylist, string login)
+        {
+            CheckTrackPlaylistExists(idTrackToPlaylist);
+
+            var trackToPlaylist = await postgres.TrackToPlaylist.FindAsync(idTrackToPlaylist);
+            var playlist = await  postgres.Playlist.FindAsync(trackToPlaylist.IdPlaylist);
+            CheckIsUserPlaylist(playlist, login);
+            postgres.Remove(trackToPlaylist);
             postgres.SaveChanges();
 
             return $"Трек из плейлиста успешно удален!";
@@ -57,6 +74,25 @@ namespace MediaStudioService.Services
         {
             CheckTrackExists(idTrack);
             CheckPlaylistExists(idPlaylist);
+
+            var trackToplaylist = new TrackToPlaylist
+            {
+                IdTrack = idTrack,
+                IdPlaylist = idPlaylist,
+            };
+
+            postgres.Add(trackToplaylist);
+            postgres.SaveChanges();
+
+            return trackToplaylist.IdTrackToPlaylist;
+        }
+
+        public long AddUserTrack(long idTrack, long idPlaylist, string login)
+        {
+            CheckTrackExists(idTrack);
+            CheckPlaylistExists(idPlaylist);
+            var playlist = postgres.Playlist.Find(idPlaylist);
+            CheckIsUserPlaylist(playlist, login);
 
             var trackToplaylist = new TrackToPlaylist
             {
@@ -218,19 +254,49 @@ namespace MediaStudioService.Services
             return $"Плейлист успешно переименован!";
         }
 
-        public long New(Playlist playlist)
+        public long CreateCommonPlaylist(Playlist playlist)
         {
             postgres.Playlist.Add(playlist);
             postgres.SaveChanges();
             return playlist.IdPlaylist;
         }
 
+        public long CreateUserPlaylist(Playlist playlist, string login)
+        {
+            var idAccount = accountService.GetIdAccountByLogin(login);
+            playlist.IdAccount = idAccount;
+            playlist.IsPublic = false;
+            postgres.Playlist.Add(playlist);
+            postgres.SaveChanges();
+            return playlist.IdPlaylist;
+        }
+
+        public async Task<long> UpdateUserPlaylistAsync(Playlist playlist, string login)
+        {
+            var oldPlaylist = await GetPlaylistByIdAsync(playlist.IdPlaylist);
+            CheckIsUserPlaylist(oldPlaylist, login);
+            oldPlaylist.IdColour = playlist.IdColour;
+            oldPlaylist.Name = playlist.Name;  
+            postgres.Playlist.Update(oldPlaylist);
+            await postgres.SaveChangesAsync();
+            return playlist.IdPlaylist;
+        }
+
+        private void CheckIsUserPlaylist(Playlist playlist, string login)
+        {
+            var idAccount = accountService.GetIdAccountByLogin(login);
+            if (playlist.IdAccount.GetValueOrDefault() != idAccount)
+            {
+                throw new MyBadRequestException($"Пользователь {login} не имеет прав на плейлист с id {playlist.IdPlaylist}!");
+            }
+        }
+
         private async Task<Playlist> GetPlaylistByIdAsync(long idPlaylist)
         {
-            //проверяем, есть ли альбом с таким id
+            //проверяем, есть ли плейлист с таким id
             CheckPlaylistExists(idPlaylist);
 
-            ///получаем альбом с заданным id из БД
+            ///получаем плейлист с заданным id из БД
             return await postgres.Playlist.FindAsync(idPlaylist);
         }
 

@@ -34,10 +34,12 @@ namespace MediaStudio.Service.Services.UserHistory
 
         public async Task<PageAlbum> GetUserHistoryAlbums(string login)
         {
-            var idAccount = _accountService.GetIdAccountByLogin(login);
+            var idUser = _accountService.GetIdUserByLogin(login);
             return await _postgres.UserHistoryAlbum.AsNoTracking()
+                .Where(history => history.IdUser == idUser)
                 .OrderByDescending(a => a.LastUse)
-                .Take(20)
+                .Distinct()
+                .Take(50)
                 .Select(album => new PageAlbum
                 {
                     IdAlbum = album.IdAlbum,

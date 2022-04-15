@@ -35,17 +35,17 @@ namespace MediaStudio.Service.Services.UserFavourites
 
         public async Task<List<PageTrack>> GetUserFavouritesTracks(string login)
         {
-            var idAccount = _accountService.GetIdAccountByLogin(login);
-            var listPageTrack = await _postgres.UserHistoryTrack.AsNoTracking()
-                .OrderByDescending(trHistory => trHistory.LastUse)
-                .Take(100)
-                .Select(userHistoryTrack => new PageTrack
+            var idUser = _accountService.GetIdUserByLogin(login);
+            var listPageTrack = await _postgres.UserFavouritesTrack.AsNoTracking()
+                .Where(favourites => favourites.IdUser == idUser)
+                .Take(500)
+                .Select(favourites => new PageTrack
                 {
-                    IdTrack = userHistoryTrack.IdTrackNavigation.IdTrack,
-                    Name = userHistoryTrack.IdTrackNavigation.Name,
-                    Duration = userHistoryTrack.IdTrackNavigation.Duration,
-                    Link = userHistoryTrack.IdTrackNavigation.TrackStorage
-                        .Where(tr => tr.IdTrack == userHistoryTrack.IdTrack
+                    IdTrack = favourites.IdTrackNavigation.IdTrack,
+                    Name = favourites.IdTrackNavigation.Name,
+                    Duration = favourites.IdTrackNavigation.Duration,
+                    Link = favourites.IdTrackNavigation.TrackStorage
+                        .Where(tr => tr.IdTrack == favourites.IdTrack
                          && tr.IdStorageNavigation.IdBucket == (short)BucketTypes.audio
                          && tr.IdStorageNavigation.ValidUntil > DateTime.Now)
                         .Select(trackStorage => trackStorage.IdStorageNavigation.TemporaryUrl)
@@ -76,6 +76,21 @@ namespace MediaStudio.Service.Services.UserFavourites
             _postgres.SaveChanges();
 
             return historyTrack.IdUserFavouritesTrack;
+        }
+
+        public string DeleteUserFavouritesTrack(int idTrack, string login)
+        {
+            _trackService.CheckTrackExists(idTrack);
+            var idUser = _accountService.GetIdUserByLogin(login);
+
+            var userFavouritesTrack = _postgres.UserFavouritesTrack.AsNoTracking()
+                            .Where(favourites => favourites.IdUser == idUser && favourites.IdTrack == idTrack)
+                            .FirstOrDefault();
+
+            _postgres.Remove(userFavouritesTrack);
+            _postgres.SaveChanges();
+
+            return $"Трек с id {idTrack} успешно удален из избранного пользователя!";
         }
     }
 }

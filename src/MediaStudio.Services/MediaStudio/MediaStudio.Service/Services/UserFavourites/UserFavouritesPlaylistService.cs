@@ -34,8 +34,9 @@ namespace MediaStudio.Service.Services.UserFavourites
 
         public async Task<PagePlaylist> GetUserFavouritesPlaylists(string login)
         {
-            var idAccount = _accountService.GetIdAccountByLogin(login);
+            var idUser = _accountService.GetIdUserByLogin(login);
             return await _postgres.UserFavouritesPlaylist.AsNoTracking()
+                .Where(favourites => favourites.IdUser == idUser)
                 .OrderByDescending(trFavourites => trFavourites.IdUserFavouritesPlaylist)
                 .Take(100)
                 .Select(playlist => new PagePlaylist
@@ -68,6 +69,21 @@ namespace MediaStudio.Service.Services.UserFavourites
             _postgres.SaveChanges();
 
             return historyPlaylist.IdUserFavouritesPlaylist;
+        }
+
+        public string DeleteUserFavouritesPlaylist(int idPlaylist, string login)
+        {
+            _playlistService.CheckPlaylistExists(idPlaylist);
+            var idUser = _accountService.GetIdUserByLogin(login);
+
+            var userFavouritesPlaylist = _postgres.UserFavouritesPlaylist.AsNoTracking()
+                            .Where(favourites => favourites.IdUser == idUser && favourites.IdPlaylist == idPlaylist)
+                            .FirstOrDefault();
+
+            _postgres.Remove(userFavouritesPlaylist);
+            _postgres.SaveChanges();
+
+            return $"Плейлист с id {idPlaylist} успешно удален из избранного пользователя!";
         }
     }
 }

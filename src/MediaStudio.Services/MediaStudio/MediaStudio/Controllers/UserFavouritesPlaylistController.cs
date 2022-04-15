@@ -36,5 +36,16 @@
         {
            return _historyPlaylistService.AddUserFavouritesPlaylist(idPlaylist, User.Identity.Name);
         }
+
+        /// <summary>
+        /// Удаляет плейлист пользователя из избранного.
+        /// </summary>
+        /// <param name="idPlaylist">Идентификатор плейлиста для удаления из избранного пользователя.</param>
+        /// <returns>Сообщение об успешном удаление плейлиста из избранного пользователя.</returns>
+        [HttpDelete]
+        public string Delete(int idPlaylist)
+        {
+            return _historyPlaylistService.DeleteUserFavouritesPlaylist(idPlaylist, User.Identity.Name);
+        }
     }
 }

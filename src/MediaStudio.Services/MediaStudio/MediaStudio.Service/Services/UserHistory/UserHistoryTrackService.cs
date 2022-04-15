@@ -35,10 +35,12 @@ namespace MediaStudio.Service.Services.UserHistory
 
         public async Task<List<PageTrack>> GetUserHistoryTracks(string login)
         {
-            var idAccount = _accountService.GetIdAccountByLogin(login);
+            var idUser = _accountService.GetIdUserByLogin(login);
             var listPageTrack = await _postgres.UserHistoryTrack.AsNoTracking()
+                .Where(history => history.IdUser == idUser)
                 .OrderByDescending(trHistory => trHistory.LastUse)
-                .Take(50)
+                .Distinct()
+                .Take(500)
                 .Select(userHistoryTrack => new PageTrack
                 {
                     IdTrack = userHistoryTrack.IdTrackNavigation.IdTrack,

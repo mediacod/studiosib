@@ -34,8 +34,9 @@ namespace MediaStudio.Service.Services.UserFavourites
 
         public async Task<PageAlbum> GetUserFavouritesAlbums(string login)
         {
-            var idAccount = _accountService.GetIdAccountByLogin(login);
+            var idUser = _accountService.GetIdUserByLogin(login);
             return await _postgres.UserFavouritesAlbum.AsNoTracking()
+                .Where(favourites => favourites.IdUser == idUser)
                 .OrderByDescending(a => a.IdUserFavouritesAlbum)
                 .Take(50)
                 .Select(album => new PageAlbum
@@ -67,6 +68,21 @@ namespace MediaStudio.Service.Services.UserFavourites
             _postgres.SaveChanges();
 
             return historyAlbum.IdUserFavouritesAlbum;
+        }
+
+        public string DeleteUserFavouritesAlbum(int idAlbum, string login)
+        {
+            _albumService.CheckAlbumExists(idAlbum);
+            var idUser = _accountService.GetIdUserByLogin(login);
+
+            var userFavouritesAlbum = _postgres.UserFavouritesAlbum.AsNoTracking()
+                            .Where(favourites => favourites.IdUser == idUser && favourites.IdAlbum == idAlbum)
+                            .FirstOrDefault();
+
+            _postgres.Remove(userFavouritesAlbum);
+            _postgres.SaveChanges();
+
+            return $"Альбом с id {idAlbum} успешно удален из избранного пользователя!";
         }
     }
 }

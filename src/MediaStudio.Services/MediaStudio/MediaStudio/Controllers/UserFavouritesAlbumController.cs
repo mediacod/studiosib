@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// Добвляет в избранное пользователя альбом.
+        /// Добавляет в избранное пользователя альбом.
         /// </summary>
         /// <param name="idAlbum">Идентификатор альбома для добавления в избранное пользователя.</param>
         /// <returns>Идентификатор избранного альбома пользователем.</returns>
@@ -35,6 +35,17 @@
         public long Post(int idAlbum)
         {
            return _historyAlbumService.AddUserFavouritesAlbum(idAlbum, User.Identity.Name);
+        }
+
+        /// <summary>
+        /// Удаляет альбом пользователя из избранного.
+        /// </summary>
+        /// <param name="idAlbum">Идентификатор альбома для удаления из избранного пользователя.</param>
+        /// <returns>Сообщение об успешном удаление альбома из избранного пользователя.</returns>
+        [HttpDelete]
+        public string Delete(int idAlbum)
+        {
+            return _historyAlbumService.DeleteUserFavouritesAlbum(idAlbum, User.Identity.Name);
         }
     }
 }

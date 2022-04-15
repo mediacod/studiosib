@@ -37,5 +37,16 @@
         {
            return _historyTrackService.AddUserFavouritesTrack(idTrack, User.Identity.Name);
         }
+
+        /// <summary>
+        /// Удаляет трек пользователя из избранного.
+        /// </summary>
+        /// <param name="idTrack">Идентификатор трека для удаления из избранного пользователя.</param>
+        /// <returns>Сообщение об успешном удаление трека из избранного пользователя.</returns>
+        [HttpDelete]
+        public string Delete(int idTrack)
+        {
+            return _historyTrackService.DeleteUserFavouritesTrack(idTrack, User.Identity.Name);
+        }
     }
 }
