@@ -132,12 +132,18 @@ namespace MediaStudioService.AccountServic
                 throw new MyNotFoundException($"Аккаунт c логином {login} отсуствует в БД!");
             }
 
-            return postgres.Account
+            var idUser = postgres.Account
                 .AsNoTracking()
                 .Include(account => account.User)
                 .Where(account => account.Login == login)
                 .Select(a => a.User.IdUser)
                 .FirstOrDefault();
+
+            if (idUser == default)
+            {
+                throw new MyNotFoundException($"В базе данных не найден пользователь для логина {login}!");
+            }
+            return idUser;
         }
 
         public string DeleteAccount(string login, string executorLogin)

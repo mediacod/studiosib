@@ -57,10 +57,6 @@ namespace MediaStudio.Service.Services.UserFavourites
             _playlistService.CheckPlaylistExists(idPlaylist);
             var idUser = _accountService.GetIdUserByLogin(login);
 
-            if (idUser == default)
-            {
-                throw new MyNotFoundException($"В базе данных не найден пользователь для логина {login}!");
-            }
 
             var historyPlaylist = new UserFavouritesPlaylist
             {

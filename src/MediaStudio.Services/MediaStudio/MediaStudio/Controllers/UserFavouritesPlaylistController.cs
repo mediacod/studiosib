@@ -1,8 +1,6 @@
 ﻿namespace MediaStudio.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using DBContext.Models;
     using MediaStudio.Service.Services.UserFavourites;
     using MediaStudioService.Models.PageModels;
     using Microsoft.AspNetCore.Mvc;

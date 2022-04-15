@@ -17,15 +17,17 @@ namespace MediaStudio.Service.Services.Audit
             postgres = context;
             _accountService = accountService;
         }
-        public int PostUser(UserModel userModel)
+        public int PostUser(UserModel userModel, string login)
         {
             CheckValidUser(userModel);
+            var idAccount = _accountService.GetIdAccountByLogin(login);
+
             var user = new User
             {
                 Gender = userModel.Gender,
                 DateBirthday = userModel.DateBirthday,
                 FirstName = userModel.FirstName,
-                IdAccount = userModel.IdAccount,
+                IdAccount = idAccount,
                 IdCloudPath = userModel.IdCloudPath,
                 LastName = userModel.LastName,
                 Patronymic = userModel.Patronymic,

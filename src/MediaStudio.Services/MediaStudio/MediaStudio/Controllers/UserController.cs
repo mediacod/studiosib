@@ -45,7 +45,7 @@
         [HttpPost]
         public int Post(UserModel user)
         {
-            return _userService.PostUser(user);
+            return _userService.PostUser(user, User.Identity.Name);
         }
     }
 }

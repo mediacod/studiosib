@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using DBContext.Models;
     using MediaStudio.Service.Services.UserFavourites;
     using MediaStudioService.ApiModels;
     using Microsoft.AspNetCore.Mvc;

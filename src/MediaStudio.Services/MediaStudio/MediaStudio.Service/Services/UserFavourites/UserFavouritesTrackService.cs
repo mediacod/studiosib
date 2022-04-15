@@ -66,11 +66,6 @@ namespace MediaStudio.Service.Services.UserFavourites
             _trackService.CheckTrackExists(idTrack);
             var idUser = _accountService.GetIdUserByLogin(login);
 
-            if (idUser == default)
-            {
-                throw new MyNotFoundException($"В базе данных не найден пользователь для логина {login}!");
-            }
-
             var historyTrack = new UserFavouritesTrack
             {
                 IdTrack = idTrack,
