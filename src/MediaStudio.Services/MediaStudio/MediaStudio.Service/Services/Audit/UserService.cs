@@ -19,8 +19,10 @@ namespace MediaStudio.Service.Services.Audit
         }
         public int PostUser(UserModel userModel, string login)
         {
-            CheckValidUser(userModel);
             var idAccount = _accountService.GetIdAccountByLogin(login);
+            userModel.IdAccount = idAccount;
+
+            CheckValidUser(userModel);
 
             var user = new User
             {

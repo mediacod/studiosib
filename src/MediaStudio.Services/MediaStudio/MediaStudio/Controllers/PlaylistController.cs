@@ -1,5 +1,6 @@
 ﻿namespace MediaStudio.Controllers.WebControllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using DBContext.Models;
     using MediaStudioService.Models.PageModels;
@@ -49,6 +50,16 @@
         public async Task<long> Put(Playlist playlist)
         {
             return await _playlistService.UpdateUserPlaylistAsync(playlist, User.Identity.Name);
+        }
+
+        /// <summary>
+        /// Получает список плейлистов пользователя.
+        /// </summary>
+        /// <returns>Возаращает список плейлистов пользователя.</returns>
+        [HttpGet]
+        public async Task<List<PagePlaylist>> Get()
+        {
+            return await _playlistService.UserList(User.Identity.Name);
         }
 
         /// <summary>

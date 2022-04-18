@@ -157,6 +157,23 @@ namespace MediaStudioService.Services
                 })
                 .ToListAsync();
         }
+        public async Task<List<PagePlaylist>> UserList(string login)
+        {
+            var idAccount = accountService.GetIdAccountByLogin(login);
+
+            return await postgres.Playlist
+                .AsNoTracking()
+                .Where(playlist => playlist.IdAccount == idAccount)
+                .Take(100)
+                .Select(playlist => new PagePlaylist
+                {
+                    IdPlaylist = playlist.IdPlaylist,
+                    IsPublic = playlist.IsPublic.GetValueOrDefault(),
+                    Name = playlist.Name,
+                    ColourCode = playlist.IdColourNavigation.Code,
+                })
+                .ToListAsync();
+        }
 
         public async Task<PagePlaylist> GetAsync(long idPlaylist)
         {
