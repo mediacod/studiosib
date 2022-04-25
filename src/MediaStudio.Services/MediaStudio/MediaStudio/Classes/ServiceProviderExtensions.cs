@@ -106,6 +106,7 @@
         {
             services.AddTransient<SectionService>();
             services.AddTransient<PageService>();
+            services.AddTransient<ColourService>();
         }
 
         public static void AddCloudService(this IServiceCollection services)

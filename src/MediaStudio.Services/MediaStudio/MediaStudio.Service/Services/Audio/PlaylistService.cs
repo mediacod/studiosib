@@ -91,6 +91,7 @@ namespace MediaStudioService.Services
         {
             CheckTrackExists(idTrack);
             CheckPlaylistExists(idPlaylist);
+            CheckPlaylistDontContainTrack(idPlaylist, idTrack);
             var playlist = postgres.Playlist.Find(idPlaylist);
             CheckIsUserPlaylist(playlist, login);
 
@@ -328,6 +329,11 @@ namespace MediaStudioService.Services
         {
             if (!postgres.Playlist.Any(e => e.IdPlaylist == idPlaylist))
                 throw new MyNotFoundException($"Ошибка! В базе данных не найден плейлист с id {idPlaylist}!");
+        }
+        public void CheckPlaylistDontContainTrack(long idPlaylist, long idTrack)
+        {
+            if (postgres.TrackToPlaylist.Any(e => e.IdPlaylist == idPlaylist && e.IdTrack == idTrack))
+                throw new MyNotFoundException($"Ошибка! Плейлист с id {idPlaylist} уже содержит трек с id {idTrack}!");
         }
 
         private void CheckTrackExists(long idTrack)
