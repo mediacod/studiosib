@@ -16,16 +16,16 @@ import {
 
 
 const navList = [
-    {title: 'Главная', el: <Home size={'23px'} color={'#fff'}/>, size: '23px', link: MAIN_PAGE},
-    {title: 'Музыка', el: <Music size={'23px'} color={'#fff'}/>, size: '23px', link: MUSIC_PAGE},
-    {title: 'Проповеди', el: <Preach size={'23px'} color={'#fff'}/>, size: '23px', link: PREACH_PAGE},
-    {title: 'Аудиокниги', el: <Books size={'23px'} color={'#fff'}/>, size: '23px', link: BOOK_PAGE},
-    {title: 'Конференции', el: <Congress size={'23px'} color={'#fff'}/>, size: '23px', link: CONFERENCES_PAGE}
+    {title: 'Главная', el: <Home size={23} color={'#fff'}/>, size: '23px', link: MAIN_PAGE},
+    {title: 'Музыка', el: <Music size={23} color={'#fff'}/>, size: '23px', link: MUSIC_PAGE},
+    {title: 'Проповеди', el: <Preach size={23} color={'#fff'}/>, size: '23px', link: PREACH_PAGE},
+    {title: 'Аудиокниги', el: <Books size={23} color={'#fff'}/>, size: '23px', link: BOOK_PAGE},
+    {title: 'Конференции', el: <Congress size={23} color={'#fff'}/>, size: '23px', link: CONFERENCES_PAGE}
 ]
 
 const favoriteNavList = [
-    {title: 'История', el: <History size={'23px'} color={'#fff'}/>, size: '23px', link: MY_HISTORY_TRACK},
-    {title: 'Избранное', el: <Favorite size={'23px'} color={'#fff'}/>, size: '23px', link: PLAYLIST_PAGE},
+    {title: 'История', el: <History size={23} color={'#fff'}/>, size: '23px', link: MY_HISTORY_TRACK},
+    {title: 'Избранное', el: <Favorite size={23} color={'#fff'}/>, size: '23px', link: PLAYLIST_PAGE},
 ]
 
 interface linkInterface {

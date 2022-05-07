@@ -4,6 +4,7 @@ import {PrevPage} from "../../icons/PrevPage";
 import Tg from "../../icons/Tg";
 import Yt from "../../icons/Yt";
 import FormSearch from "../../formSearch";
+import {ButtonIcon} from "../../../mobile/components/blocks/ButtonIcon";
 
 function NextPage(props: { color: string, size: string, className: string, height: string }) {
     return null;
@@ -27,18 +28,29 @@ export const Header: React.FC = () => {
                 <StyledNavButton className={'Prev'} onClick={()=>{}}>
                     <StyledPrevIcon className={'IconPrev'} color={'#3A2C51'} size={'11px'} height={'19px'}/>
                 </StyledNavButton>
+
                 <StyledNavButton className={'Next'} onClick={() =>{}}>
                     <StyledNextIcon className={'IconNext'} color={'#3A2C51'} size={'11px'} height={'19px'}/>
                 </StyledNavButton>
+
             </StyledNavigation>
+
             <StyledSearch onClick={()=>{}}>
                 <FormSearch />
             </StyledSearch>
+
             <StyledAuth>
                 <StyledContact>
-                    <Tg action={targetTg} color={''} size={'30px'} className={'contactIcon'}/>
-                    <Yt action={targetYt} color={''} size={'30px'} className={'contactIcon'}/>
-                </StyledContact>
+                    <ButtonIcon size={30}>
+                        <Tg action={targetTg} color={''} size={30} className={'contactIcon'}/>
+                    </ButtonIcon>
+
+                    <ButtonIcon size={30}>
+                        <Yt action={targetYt} color={''} size={30} className={'contactIcon'}/>
+                    </ButtonIcon>
+
+                    </StyledContact>
+
                 <StyledName>Имя пользователя</StyledName>
             </StyledAuth>
         </StyledHeader>

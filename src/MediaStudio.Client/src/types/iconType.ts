@@ -1,7 +1,7 @@
 export interface IImageProps {
     action?: any;
     color?: string;
-    size: string;
+    size?: number;
     height?: string;
     className?: string
 }

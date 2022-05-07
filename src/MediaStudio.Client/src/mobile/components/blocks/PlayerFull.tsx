@@ -18,6 +18,7 @@ export const PlayerFull: React.FC<IProps> = ({openHandler}) => {
     const playerRef: any = useRef(null)
     const optionsSwipe: any = { direction: 'vertical', threshold: 120, preventDefault: false };
     const swipe = useVerticalSwipe(playerRef, optionsSwipe)
+    const [currentTime, setCurrentTime] = useState(progress?.played * 100)
 
     const windowHeight = window.innerHeight
 
@@ -32,24 +33,37 @@ export const PlayerFull: React.FC<IProps> = ({openHandler}) => {
         setInitial(true)
     }, [])
 
-    const [currentTime, setCurrentTime] = useState(progress?.played * 100)
-
+    /**
+     * Изменяет значение в input range при перетаскивание ползунка
+     */
     const onChange = (e:  any) => {
         setCurrentTime(e)
     }
 
+    /**
+     * Устанавливает в плеер новое значение прогресса
+     */
     const onAfterChange = (e:  any) => {
         PLAYER.current.seekTo(e/100, 'fraction')
     }
 
+    /**
+     * Следит за состояние текущего прогресса аудио
+     */
     useEffect(()=> {
         setCurrentTime(progress?.played * 100)
     }, [progress?.played])
 
+    /**
+    * Переключатель воспроизведения
+    */
     const playHandler = (e: any) => {
         togglePlaying()
     }
 
+    /**
+     * Передает новый аудио объект
+     */
     const play = ({idTrack}: any) => {
         setAudio({
             data: {...albumData, tracks: playlist},
@@ -57,11 +71,24 @@ export const PlayerFull: React.FC<IProps> = ({openHandler}) => {
         })
     }
 
+    /**
+     * Высчитывает максимальную высоты для очереди треков
+     */
     const minAnchor = windowHeight < 600 ? windowHeight * 0.05 : 90
 
+    /**
+     * Массив с набором значений высоты для очереди трека
+     */
     const anchors = [minAnchor, windowHeight * 0.8]
 
+    /**
+     * Ищет индекс текущего трека
+     */
     const currentTrackIndex = playlist.findIndex((t: any) => t.idTrack === track.idTrack)
+
+    /**
+     * Удаляет треки, которые находятся перед текущем
+     */
     const currentTracks = playlist.slice(currentTrackIndex)
 
     return (

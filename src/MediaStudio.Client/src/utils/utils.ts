@@ -12,3 +12,7 @@ export const getTypeCell = (cell: any) => {
         return 2
     }
 }
+
+// const getWidthIcon = (height: number, width: number, size: number) => {
+//     const  width / height
+// }

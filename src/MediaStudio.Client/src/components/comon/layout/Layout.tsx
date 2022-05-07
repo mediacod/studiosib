@@ -1,7 +1,8 @@
-import React, {useEffect, useState } from 'react';
+import React from 'react';
 import styled from "styled-components";
 import {Header} from "./Header";
 import {Sidebar} from "./Sidebar";
+import {Player} from "../player/Player";
 
 export const Layout: React.FC = ({children}) => {
 
@@ -12,7 +13,7 @@ export const Layout: React.FC = ({children}) => {
             <StyledContent>
                 {children}
             </StyledContent>
-            {/*<Player/>*/}
+            <Player />
         </StyledMain>
     );
 };
@@ -30,4 +31,8 @@ const StyledMain = styled.div`
 const StyledContent = styled.div`
   grid-area: ct;
   overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  padding: 45px 40px 40px;
+  box-sizing: border-box;
 `
